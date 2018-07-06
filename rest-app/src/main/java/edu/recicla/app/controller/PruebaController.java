@@ -17,5 +17,10 @@ public class PruebaController {
 		user.getUsuario();
 		return "Done";
 	}
+	
+	@RequestMapping("/prueba")
+	public String process1(){
+		return "hola mario";
+	}
 
 }
