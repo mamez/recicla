@@ -77,7 +77,7 @@
 			              <outputDirectory>${basedir}/target/classes/static/</outputDirectory >
 			              <resources>
 			                  <resource>
-			                      <directory>${basedir}/../angular-app/dist</directory >
+			                      <directory>${basedir}/../angular-app/dist/angular-app</directory >
 			                  </resource>
 			              </resources>
 			          </configuration>
