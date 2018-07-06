@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.recicla.app.service.UserService;
 
 @RestController
+@RequestMapping("/loguin2")
 public class PruebaController {
 	
 	@Autowired

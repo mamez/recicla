@@ -8,10 +8,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import ch.qos.logback.core.net.LoginAuthenticator;
+
 @SpringBootApplication
 @Configuration
 @EntityScan(basePackages= {"edu.recicla.app.entity"})
-@ComponentScan(basePackages= {"edu.recicla.app.serviceImpl","edu.recicla.app.controller"})
+@ComponentScan(basePackages= {"edu.recicla.app.serviceImpl","edu.recicla.app.controller"} ,basePackageClasses= {Loguin.class})
 @EnableJpaRepositories("edu.recicla.app.repository")
 public class WebAppApplication implements CommandLineRunner{
 
