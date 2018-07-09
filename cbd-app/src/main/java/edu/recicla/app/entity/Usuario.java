@@ -3,8 +3,10 @@ package edu.recicla.app.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.recicla.app.enums.EstadoUsuario;
 import com.recicla.app.enums.TipoUsuario;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -42,11 +44,15 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuarioBean")
 	private List<PuntosCritico> puntosCriticos;
 
-	//bi-directional many-to-one association to TipoUsuario
-	//@ManyToOne(fetch=FetchType.LAZY)
-	//@JoinColumn(name="tipo")
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoUsuario;
+	
+	@Enumerated(EnumType.STRING)
+	private EstadoUsuario estadoUsuario;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_modificacion")
+	private Date fechaModificacion;
 
 	public Usuario() {
 	}
@@ -173,6 +179,22 @@ public class Usuario implements Serializable {
 
 	public void setPuntos(Long puntos) {
 		this.puntos = puntos;
+	}
+
+	public EstadoUsuario getEstadoUsuario() {
+		return estadoUsuario;
+	}
+
+	public void setEstadoUsuario(EstadoUsuario estadoUsuario) {
+		this.estadoUsuario = estadoUsuario;
+	}
+
+	public Date getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 

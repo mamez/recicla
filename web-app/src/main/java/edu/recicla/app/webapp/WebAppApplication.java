@@ -19,6 +19,8 @@ import edu.recicla.app.controller.LoguinController;
 @ComponentScan(basePackages= {"edu.recicla.app.serviceImpl","edu.recicla.app.controller","com.recicla.app.security"} ,basePackageClasses= {LoguinController.class})
 @EnableJpaRepositories("edu.recicla.app.repository")
 public class WebAppApplication implements CommandLineRunner{
+	
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(WebAppApplication.class, args);

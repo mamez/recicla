@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import edu.recicla.app.entity.Usuario;
 
 @Repository
-public interface UserRepository extends CrudRepository<Usuario, Long>{
+public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 	List<Usuario> findByCorreo(String correo);
 }

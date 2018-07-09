@@ -12,14 +12,14 @@ import com.recicla.app.security.JwtConfig;
 import edu.recicla.app.entity.Usuario;
 import edu.recicla.app.model.TokenModel;
 import edu.recicla.app.model.UsuarioModel;
-import edu.recicla.app.repository.UserRepository;
+import edu.recicla.app.repository.UsuarioRepository;
 import edu.recicla.app.service.LoguinService;
 
 @Service
 public class LoguinServiceImpl implements LoguinService {
 	
 	@Autowired
-	UserRepository userRepository;
+	UsuarioRepository userRepository;
 	
 	@Autowired
 	JwtConfig jwtConfig;
@@ -43,6 +43,8 @@ public class LoguinServiceImpl implements LoguinService {
 					String tokenJwt=jwtConfig.getToken(u);
 					token= new TokenModel();
 					token.setToken(tokenJwt);
+				}else {
+					throw new JobGreenSecurityExeption("password no valido");
 				}
 			}else {
 				throw new JobGreenSecurityExeption("Usuario no existe");
