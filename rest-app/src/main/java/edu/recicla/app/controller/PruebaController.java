@@ -13,15 +13,6 @@ public class PruebaController {
 	@Autowired
 	UserService user;
 	
-	@RequestMapping("/save")
-	public String process(){
-		user.getUsuario();
-		return "Done";
-	}
 	
-	@RequestMapping("/prueba")
-	public String process1(){
-		return "hola mario";
-	}
 
 }

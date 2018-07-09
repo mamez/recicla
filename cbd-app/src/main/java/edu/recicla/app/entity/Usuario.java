@@ -28,7 +28,7 @@ public class Usuario implements Serializable {
 
 	private String password;
 
-	private String puntos;
+	private Long puntos;
 
 	//bi-directional many-to-one association to NewTable
 	@OneToMany(mappedBy="usuarioBean")
@@ -91,13 +91,7 @@ public class Usuario implements Serializable {
 		this.password = password;
 	}
 
-	public String getPuntos() {
-		return this.puntos;
-	}
-
-	public void setPuntos(String puntos) {
-		this.puntos = puntos;
-	}
+	
 
 	public List<SolicitudCanje> getNewTables() {
 		return this.solicitudCanje;
@@ -172,5 +166,15 @@ public class Usuario implements Serializable {
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+
+	public Long getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(Long puntos) {
+		this.puntos = puntos;
+	}
+
+
 
 }

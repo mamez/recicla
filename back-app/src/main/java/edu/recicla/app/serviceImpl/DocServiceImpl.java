@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.recicla.app.entity.ImagenRepositoy;
+import edu.recicla.app.model.DocModel;
 import edu.recicla.app.repository.DocRepository;
-import edu.recicla.app.request.model.DocModel;
 import edu.recicla.app.service.DocService;
 
 public class DocServiceImpl implements DocService {

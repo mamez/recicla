@@ -19,7 +19,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.recicla.app.enums.TipoUsuario;
 
-import edu.recicla.app.request.model.UsuarioModel;
+import edu.recicla.app.model.UsuarioModel;
 
 @Component
 public class JwtConfig {

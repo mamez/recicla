@@ -1,4 +1,4 @@
-package edu.recicla.app.request.model;
+package edu.recicla.app.model;
 
 import java.io.Serializable;
 

@@ -1,11 +1,13 @@
-package edu.recicla.app.request.model;
+package edu.recicla.app.model;
 
 import java.io.Serializable;
 
-import com.recicla.app.enums.TipoUsuario;
-
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.recicla.app.enums.TipoUsuario;
+@JsonInclude(Include.NON_NULL)
 public class UsuarioModel implements Serializable{
 	/**
 	 * 
@@ -26,9 +28,9 @@ public class UsuarioModel implements Serializable{
 	
 	private String password;
 	
-	private String puntos;
+	private Long puntos;
 	
-	@NotNull
+	
 	private TipoUsuario tipoUsuario;
 	
 	public Long getId() {
@@ -61,17 +63,18 @@ public class UsuarioModel implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPuntos() {
-		return puntos;
-	}
-	public void setPuntos(String puntos) {
-		this.puntos = puntos;
-	}
+
 	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
 	}
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+	}
+	public Long getPuntos() {
+		return puntos;
+	}
+	public void setPuntos(Long puntos) {
+		this.puntos = puntos;
 	}
 	
 	

@@ -1,6 +1,6 @@
 package edu.recicla.app.service;
 
-import edu.recicla.app.request.model.DocModel;
+import edu.recicla.app.model.DocModel;
 
 public interface DocService {
 	

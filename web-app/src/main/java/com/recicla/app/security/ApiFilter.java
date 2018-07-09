@@ -32,8 +32,7 @@ public class ApiFilter implements Filter{
 	}
 
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)throws IOException, ServletException {
 		
 		HttpServletRequest request=(HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse) res;
@@ -45,13 +44,13 @@ public class ApiFilter implements Filter{
 			
 		}else {
 			try {
-			String tokeAutorizacion=request.getHeader("Autorization");
+			String tokeAutorizacion=request.getHeader("Authorization");
 			tokeAutorizacion=loguinService.verificar(tokeAutorizacion);
 			response.setHeader("Autorization", tokeAutorizacion);
-			}catch (SecurityException e) {
-				throw e;
-			}catch (Exception e) {
-				throw new SecurityException(e.getMessage());
+			}catch (JobGreenSecurityExeption e) {
+				response.sendError(403, e.getMessage());
+			}catch(NullPointerException e) {
+				response.sendError(403, "El parametro Authorization es requerido");
 			}
 		}
         response.setHeader("Access-Control-Allow-Origin", "*");
