@@ -7,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class ImagenRepositoy {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	@Column
 	private String url;
@@ -23,8 +25,12 @@ public class ImagenRepositoy {
 	@Column
 	private String tipo;
 	
+	private Long length;
+	    
+	
 	@Lob
-	@Column(length=100000)
+	@Type(type="org.hibernate.type.BinaryType") 
+	@Column(name="imagen")
 	private byte[] imagen;
 	
 
@@ -62,13 +68,23 @@ public class ImagenRepositoy {
 		this.imagen = imagen;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Long getLength() {
+		return length;
+	}
+
+	public void setLength(Long length) {
+		this.length = length;
+	}
+
+	
 
 	
 
