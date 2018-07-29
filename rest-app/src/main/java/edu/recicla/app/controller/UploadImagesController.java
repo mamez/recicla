@@ -27,6 +27,7 @@ public class UploadImagesController {
 	@Autowired
 	DocService docService;
 	
+	
 	@RequestMapping(value="/upload/{tipo}", method=RequestMethod.POST)
 	public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file,@PathVariable @NotNull String tipo) {
 		if(file != null) {
