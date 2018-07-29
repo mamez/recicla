@@ -1,0 +1,20 @@
+
+<table datatable [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+  <thead>
+    <tr>
+      <th *ngFor="let cabecera of config.map">{{cabecera.cab}}</th>
+      <th *ngIf='config.showEdit || config.showdelete'>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let data of listData" >
+          <td *ngFor="let column of config.map">
+               {{data[column.data]}}
+          </td>
+          <td *ngIf='config.showEdit || config.showdelete' style="width: 100px;" >
+              <button (click)="editElemt(data)" class="btn btn-primary float-right" type="button"><i class="icon-pencil icons"></i></button>
+              <button (click)="deleteElemt(data)" class="btn btn-primary float-left" type="button"><i class="icon-trash icons"></i></button>
+          </td>
+       </tr>
+  </tbody>
+</table>

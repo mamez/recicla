@@ -48,6 +48,7 @@ public class Usuario implements Serializable {
 	private TipoUsuario tipoUsuario;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name="estado_usuario")
 	private EstadoUsuario estadoUsuario;
 	
 	@Temporal(TemporalType.DATE)

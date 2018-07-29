@@ -1,49 +1,142 @@
 package edu.recicla.app.serviceImpl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.recicla.app.entity.ImagenRepositoy;
 import edu.recicla.app.model.DocModel;
+import edu.recicla.app.model.DocType;
 import edu.recicla.app.repository.DocRepository;
 import edu.recicla.app.service.DocService;
 
+@Service
 public class DocServiceImpl implements DocService {
 	
 	@Autowired
 	DocRepository imagen;
+	
+	/* Metodo para obtener una imagen por id 
+	 * (non-Javadoc)
+	 * @see edu.recicla.app.service.DocService#getImage(long)
+	 */
+	@Override
+	public DocModel getImage(long id) {
+		DocModel model= null;
+		Optional<ImagenRepositoy> optionalImage =imagen.findById(Long.toString(id));
+		if(optionalImage.isPresent()){
+			ImagenRepositoy img=optionalImage.get();
+			model=new DocModel();
+			model.setId(img.getId());
+			model.setNombre(img.getNombre());
+			model.setImagen(img.getImagen());
+			model.setTipo(img.getTipo());
+			model.setUrl(img.getUrl());
+		}
+		return model;
+	}
+	
+	
+    /*Metodo para obtener una imagen por el nombre
+     * (non-Javadoc)
+     * @see edu.recicla.app.service.DocService#getImage(java.lang.String)
+     */
+	@Override
+	public DocModel getImage(String name) {
+		DocModel model=null;
+		List<ImagenRepositoy> imagenres =imagen.findByNombre(name);
+		if(imagenres.size() > 0) {
+			model= new DocModel();
+			ImagenRepositoy img=imagenres.get(0);
+			model.setId(img.getId());
+			model.setNombre(img.getNombre());
+			model.setImagen(img.getImagen());
+			model.setTipo(img.getTipo());
+			model.setUrl(img.getUrl());
+		}
+		return model;
+	}
+	
+	/*
+	 * Metodo para eliminar una imageb
+	 */
+	@Override
+	public void deleteImage(long id) {
+		boolean existe=imagen.existsById(Long.toString(id));
+		if(existe) {
+			imagen.deleteById(Long.toString(id));
+		}
+	}
+	
+	@Override
+	public void deleteIsEstateInit() {
+		imagen.deleteAllEstateInit(Long.valueOf(0));
+		
+	}
 
+
+	/*Merodo para guardar una imagen
+	 * (non-Javadoc)
+	 * @see edu.recicla.app.service.DocService#saveImage(edu.recicla.app.model.DocModel)
+	 */
 	@Override
 	public long saveImage(DocModel model) {
 		ImagenRepositoy img= new ImagenRepositoy();
 		img.setImagen(model.getImagen());
-		img.setUrl(model.getUrl());
 		img.setTipo(model.getTipo());
-		img.setNombre(model.getNombre());
+		img.setLength(model.getLength());
+		String nombre=getNombre(model.getTipoDocumento());
+		img.setNombre(nombre);
+		String extencion=getExtencion(model.getTipo());
+		img.setUrl("/images/"+nombre+"."+extencion);
+		img.setEstado(Long.valueOf("0"));
 		img=imagen.save(img);
 		return img.getId();
 	}
-
+	
+	/*Metodo para actualizar el estado de una imagen a el de asociado
+	 * (non-Javadoc)
+	 * @see edu.recicla.app.service.DocService#updateStateImage(java.lang.String)
+	 */
 	@Override
-	public void delateImage(long id) {
-		ImagenRepositoy img= new ImagenRepositoy();
-		img.setId(id);
-		imagen.delete(img);
+	public void updateStateImage(String name) {
+		List<ImagenRepositoy> imagenres =imagen.findByNombre(name);
+		if(imagenres.size() > 0) {
+			ImagenRepositoy img=imagenres.get(0);
+			img.setEstado(Long.valueOf(1));
+			imagen.save(img);
+		}
+	}
+	
+	/*Eliminar imagen por nombre
+	 * (non-Javadoc)
+	 * @see edu.recicla.app.service.DocService#deleteImagenByName(java.lang.String)
+	 */
+	@Override
+	public void deleteImagenByName(String name) {
+		imagen.deleteImagenByNombre(name);
 	}
 
-	@Override
-	public DocModel getImage(long id) {
-		Optional<ImagenRepositoy> imagenres =imagen.findById(Long.toString(id));
-		ImagenRepositoy img= new ImagenRepositoy();
-		img=imagenres.get();
-		DocModel model= new DocModel();
-		model.setId(img.getId());
-		model.setNombre(img.getNombre());
-		model.setImagen(img.getImagen());
-		model.setTipo(img.getTipo());
-		model.setUrl(img.getUrl());
-		return model;
+	
+	
+   private String getExtencion(String tipo) {
+	   String[] arrString=tipo.split("/");
+	   return arrString[0];
+   }
+	
+	
+	private String getNombre(DocType tipo) {
+		String pattern = "ssmmMMddyyyy";
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		String nombre=format.format(new Date());
+		return tipo.getTipo()+nombre;
 	}
+
+
+	
 
 }

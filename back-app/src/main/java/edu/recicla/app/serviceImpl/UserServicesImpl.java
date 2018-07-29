@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.recicla.app.enums.EstadoUsuario;
 import com.recicla.app.enums.TipoUsuario;
 import edu.recicla.app.entity.Usuario;
 import edu.recicla.app.model.UsuarioModel;
@@ -31,6 +33,7 @@ public class UserServicesImpl implements UserService{
 		String pass=DigestUtils.md5Hex(usuarioModel.getPassword());
 		u.setPassword(pass);
 		u.setPuntos(Long.valueOf("0"));
+		u.setEstadoUsuario(EstadoUsuario.ACTIVE);
 		TipoUsuario tipoUsuario= tipo.equals("USER")? TipoUsuario.USER_MOBILE : TipoUsuario.USER_ADMIN;
 		u.setTipoUsuario(tipoUsuario);
 		u= userRepository.save(u);

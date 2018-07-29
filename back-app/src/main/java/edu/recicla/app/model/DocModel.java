@@ -14,6 +14,8 @@ public class DocModel implements Serializable{
 	private String nombre;
 	private String tipo;
 	private byte[] imagen;
+	private Long length;
+	private DocType tipoDocumento;
 	
 	
 	public String getUrl() {
@@ -45,5 +47,17 @@ public class DocModel implements Serializable{
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public Long getLength() {
+		return length;
+	}
+	public void setLength(Long length) {
+		this.length = length;
+	}
+	public DocType getTipoDocumento() {
+		return tipoDocumento;
+	}
+	public void setTipoDocumento(DocType tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 }

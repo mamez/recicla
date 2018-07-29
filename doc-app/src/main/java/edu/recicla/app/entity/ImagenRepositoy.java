@@ -26,11 +26,13 @@ public class ImagenRepositoy {
 	private String tipo;
 	
 	private Long length;
+	
+	private Long estado;
 	    
 	
 	@Lob
-	@Type(type="org.hibernate.type.BinaryType") 
-	@Column(name="imagen")
+	//@Type(type="org.hibernate.type.BinaryType") 
+	@Column(name="imagen",length=3000)
 	private byte[] imagen;
 	
 
@@ -82,6 +84,14 @@ public class ImagenRepositoy {
 
 	public void setLength(Long length) {
 		this.length = length;
+	}
+
+	public Long getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Long estado) {
+		this.estado = estado;
 	}
 
 	

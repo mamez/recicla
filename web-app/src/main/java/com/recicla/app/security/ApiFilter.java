@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import edu.recicla.app.service.LoguinService;
@@ -24,6 +25,9 @@ public class ApiFilter implements Filter{
 	
 	@Autowired
 	private LoguinService loguinService;
+	
+	@Autowired
+	private Environment env;
 
 	@Override
 	public void destroy() {
@@ -44,9 +48,12 @@ public class ApiFilter implements Filter{
 			
 		}else {
 			try {
-			String tokeAutorizacion=request.getHeader("Authorization");
-			tokeAutorizacion=loguinService.verificar(tokeAutorizacion);
-			response.setHeader("Autorization", tokeAutorizacion);
+				boolean seguridadActivada=new Boolean(env.getProperty("edu.recicla.env.seguridad"));
+			if(seguridadActivada) {
+				String tokeAutorizacion=request.getHeader("Authorization");
+				tokeAutorizacion=loguinService.verificar(tokeAutorizacion);
+				response.setHeader("Autorization", tokeAutorizacion);
+			}	
 			}catch (JobGreenSecurityExeption e) {
 				response.sendError(403, e.getMessage());
 			}catch(NullPointerException e) {

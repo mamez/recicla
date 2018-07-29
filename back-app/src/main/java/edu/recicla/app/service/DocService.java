@@ -5,7 +5,11 @@ import edu.recicla.app.model.DocModel;
 public interface DocService {
 	
 	public long saveImage(DocModel model);
-	public void delateImage(long id);
+	public void deleteImage(long id);
+	public void deleteImagenByName(String name);
 	public DocModel getImage(long id);
+	public DocModel getImage(String name);
+	public void updateStateImage(String name);
+	public void deleteIsEstateInit();
 
 }

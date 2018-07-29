@@ -13,7 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -59,7 +58,6 @@ public class RestExceptionHandler {
 	    
 	    @ExceptionHandler({MethodArgumentNotValidException.class})
 	    public ResponseEntity<ExceptionMessage> invalidInput(MethodArgumentNotValidException ex) {
-	        BindingResult result = ex.getBindingResult();
 	        ExceptionMessage response = new ExceptionMessage(ex);
 	        return new ResponseEntity<ExceptionMessage>(response, HttpStatus.BAD_REQUEST);
 	    }
