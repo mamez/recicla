@@ -1,5 +1,4 @@
 package edu.recicla.app.controller;
-
 import java.io.IOException;
 
 import javax.validation.constraints.NotNull;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.recicla.app.model.DocModel;
 import edu.recicla.app.model.DocType;
 import edu.recicla.app.service.DocService;
-
 @RestController
 @RequestMapping("/resource/images")
 public class UploadImagesController {
