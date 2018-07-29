@@ -43,3 +43,4 @@ node_modules/
 .classpath
 
 
+web-app/src/main/resources/application-dev.properties
