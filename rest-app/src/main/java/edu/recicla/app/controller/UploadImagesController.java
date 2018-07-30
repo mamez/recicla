@@ -19,7 +19,7 @@ import edu.recicla.app.model.DocModel;
 import edu.recicla.app.model.DocType;
 import edu.recicla.app.service.DocService;
 @RestController
-@RequestMapping("/resourc/images")
+@RequestMapping("/resources/images")
 public class UploadImagesController {
 	
 	@Autowired
