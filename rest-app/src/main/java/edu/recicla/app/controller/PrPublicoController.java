@@ -20,10 +20,12 @@ import com.recicla.app.security.JobGreenExeption;
 
 import edu.recicla.app.model.PrPublicoModel;
 import edu.recicla.app.service.PrPublicoService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/prPublico")
+@Api(description="Puntos de recoleccion")
 public class PrPublicoController {
 	
 	@Autowired
@@ -72,7 +74,7 @@ public class PrPublicoController {
 			if(resp==null) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}else {
-				return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.CREATED);
+				return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.OK);
 			}
 		}catch (Exception e) {
 			throw new JobGreenExeption("Error al crear punto de recoleccion");
@@ -87,7 +89,7 @@ public class PrPublicoController {
 		try {
 			model.setId(id);
 			PrPublicoModel resp=prPublicoService.updatePrPublico(model);
-			return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.OK);
+			return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.CREATED);
 		}catch (Exception e) {
 			throw new JobGreenExeption("Error al actualizar punto de recoleccion");
 		}

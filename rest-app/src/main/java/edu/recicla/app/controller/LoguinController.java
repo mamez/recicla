@@ -20,7 +20,6 @@ import edu.recicla.app.service.LoguinService;
 @RequestMapping("/oauth/token")
 public class LoguinController {
 	
-	
 	private static final Logger log = LoggerFactory.getLogger(LoguinController.class);
 
 
