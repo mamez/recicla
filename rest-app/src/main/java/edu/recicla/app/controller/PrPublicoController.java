@@ -74,7 +74,7 @@ public class PrPublicoController {
 			if(resp==null) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}else {
-				return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.OK);
+				return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.CREATED);
 			}
 		}catch (Exception e) {
 			throw new JobGreenExeption("Error al crear punto de recoleccion");
@@ -89,7 +89,7 @@ public class PrPublicoController {
 		try {
 			model.setId(id);
 			PrPublicoModel resp=prPublicoService.updatePrPublico(model);
-			return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.CREATED);
+			return new ResponseEntity<PrPublicoModel>(resp,HttpStatus.OK);
 		}catch (Exception e) {
 			throw new JobGreenExeption("Error al actualizar punto de recoleccion");
 		}
@@ -97,15 +97,15 @@ public class PrPublicoController {
 
 	
 	@DeleteMapping("/{id}")
-	@ApiOperation(value = "Actualizar punto publico",
-    notes = "Metodo para Crear un punto de recoleccion publico")
+	@ApiOperation(value = "Eliminar punto publico",
+    notes = "Metodo para eliminar un punto de recoleccion publico")
 	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) Long id) 
 			throws JobGreenExeption{
 		try {
 			prPublicoService.deletePrPublico(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
-			throw new JobGreenExeption("Error al actualizar punto de recoleccion");
+			throw new JobGreenExeption("Error al eliminar punto de recoleccion");
 		}
 	}
 }

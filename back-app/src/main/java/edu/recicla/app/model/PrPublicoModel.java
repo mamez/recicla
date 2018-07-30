@@ -20,19 +20,19 @@ public class PrPublicoModel implements Serializable{
 	@ApiModelProperty(notes="Codigo del punto de recoleccion",required=false)
 	private Long id;
 	
-	@NotNull
+	@NotNull(message="El campo Descripcion es requerido")
 	@ApiModelProperty(notes="Descripcion de el punto de recoleccion",required=true)
 	private String descripcion;
 	
-	@NotNull
+	@NotNull(message="El campo lat es requerido")
 	@ApiModelProperty(notes="Latitud de el punto de recoleccion",required=true)
 	private String lat;
 	
-	@NotNull
+	@NotNull(message="El campos lng es requerido")
 	@ApiModelProperty(notes="Longitud de el punto de recoleccion",required=true)
 	private String lng;
 	
-	@NotNull
+	@NotNull(message="El campo nomcre es requerido")
 	@ApiModelProperty(notes="Nombre de el punto de recoleccion",required=true)
 	private String nombre;
 	

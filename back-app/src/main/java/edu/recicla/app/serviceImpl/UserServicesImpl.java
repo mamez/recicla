@@ -25,7 +25,7 @@ public class UserServicesImpl implements UserService{
 
 
 	@Override
-	public UsuarioModel saveUsuario(UsuarioModel usuarioModel, String tipo) {
+	public UsuarioModel saveUsuario(UsuarioModel usuarioModel, TipoUsuario tipo){
 		Usuario u= new Usuario();
 		u.setNombre(usuarioModel.getNombre());
 		u.setApellidos(usuarioModel.getApellidos());
@@ -34,10 +34,14 @@ public class UserServicesImpl implements UserService{
 		u.setPassword(pass);
 		u.setPuntos(Long.valueOf("0"));
 		u.setEstadoUsuario(EstadoUsuario.ACTIVE);
-		TipoUsuario tipoUsuario= tipo.equals("USER")? TipoUsuario.USER_MOBILE : TipoUsuario.USER_ADMIN;
-		u.setTipoUsuario(tipoUsuario);
-		u= userRepository.save(u);
-		usuarioModel.setId(u.getId());
+		u.setTipoUsuario(tipo);
+		 List<Usuario> listaCoreos=  userRepository.findByCorreo(u.getCorreo());
+		 if(!listaCoreos.isEmpty()) {
+			 u= userRepository.save(u);
+		     usuarioModel.setId(u.getId());
+		 }else {
+			 throw new 	IllegalArgumentException("Existe un usuario con el mismo correo");
+		 }
 		return usuarioModel;
 	}
 
@@ -113,13 +117,18 @@ public class UserServicesImpl implements UserService{
 			 Usuario usuario=listUsuario.get();
 			 usuario.setNombre(usuarioModel.getNombre());
 			 usuario.setApellidos(usuarioModel.getApellidos());
-			 usuario= userRepository.save(usuario);
-			 usuarioModelResponse = new UsuarioModel();
-			 usuarioModelResponse.setApellidos(usuario.getApellidos());
-			 usuarioModelResponse.setCorreo(usuario.getCorreo());
-			 usuarioModelResponse.setId(usuario.getId());
-			 usuarioModelResponse.setNombre(usuario.getNombre());
-			 usuarioModelResponse.setPuntos(usuario.getPuntos());
+			 List<Usuario> listaCoreos=  userRepository.findByCorreo(usuario.getCorreo());
+			 if(!listaCoreos.isEmpty()) {
+				 usuario= userRepository.save(usuario);
+				 usuarioModelResponse = new UsuarioModel();
+				 usuarioModelResponse.setApellidos(usuario.getApellidos());
+				 usuarioModelResponse.setCorreo(usuario.getCorreo());
+				 usuarioModelResponse.setId(usuario.getId());
+				 usuarioModelResponse.setNombre(usuario.getNombre());
+				 usuarioModelResponse.setPuntos(usuario.getPuntos());
+			 }else {
+				 throw new 	IllegalArgumentException("Existe un usuario con el mismo correo");
+			 }
 		 }
 		return usuarioModelResponse;
 	}

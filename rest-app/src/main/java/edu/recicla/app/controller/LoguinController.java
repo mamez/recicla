@@ -15,9 +15,12 @@ import com.recicla.app.security.JobGreenSecurityExeption;
 import edu.recicla.app.model.LoguinModel;
 import edu.recicla.app.model.TokenModel;
 import edu.recicla.app.service.LoguinService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/oauth/token")
+@Api(description="Puntos de recoleccion")
 public class LoguinController {
 	
 	private static final Logger log = LoggerFactory.getLogger(LoguinController.class);
@@ -27,6 +30,8 @@ public class LoguinController {
 	LoguinService loguinService;
 	
 	@PostMapping
+	@ApiOperation(value = "Autenticacion",
+    notes = "Metodo para atenticar usuarios")
 	public TokenModel loguin(@RequestBody @Valid LoguinModel loguinModel) throws JobGreenSecurityExeption {
 		log.debug("Ingreso al metodo tal las variables"+loguinModel.toString());
 		TokenModel tokenModel=null;
