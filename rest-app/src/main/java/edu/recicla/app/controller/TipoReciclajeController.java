@@ -20,10 +20,12 @@ import com.recicla.app.security.JobGreenExeption;
 
 import edu.recicla.app.model.TipoReciclajeModel;
 import edu.recicla.app.service.TipoReciclajeService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/TipoReciclaje")
+@Api(description="Tipo Reciclaje")
 public class TipoReciclajeController {
 	
 	@Autowired
@@ -41,7 +43,7 @@ public class TipoReciclajeController {
 				return new ResponseEntity<List<TipoReciclajeModel>>(resp,HttpStatus.OK);
 			}
 		}catch(Exception e){
-			throw new JobGreenExeption("Error al listar los puntos de recolección");
+			throw new JobGreenExeption("Error al listar los tipos de reciclaje");
 		}
 	}
 	
@@ -58,7 +60,7 @@ public class TipoReciclajeController {
 				return new ResponseEntity<TipoReciclajeModel>(resp,HttpStatus.OK); //pasa un OK
 			}
 		}catch(Exception e){
-			throw new JobGreenExeption("Error al listar los puntos de recolección");
+			throw new JobGreenExeption("Error al listar los tipos de reciclaje");
 		}
 	}
 	
@@ -75,13 +77,13 @@ public class TipoReciclajeController {
 				return new ResponseEntity<TipoReciclajeModel>(resp,HttpStatus.CREATED); //pasa un OK
 			}
 		}catch(Exception e){
-			throw new JobGreenExeption("Error al listar los puntos de recolección");
+			throw new JobGreenExeption("Error al crear tipo de reciclaje");
 		}
 	}
 	
 	@PutMapping("/{id}") 
 	@ApiOperation(value="Actualizar tipo de reciclaje",
-	notes="Método para crear un tipo de reciclaje")
+	notes="Método para actualizar de reciclaje")
 	public ResponseEntity<TipoReciclajeModel> update(@RequestBody @Valid TipoReciclajeModel model,
 			@PathVariable(name="id", required=true) Long id)
 			throws JobGreenExeption{
@@ -91,13 +93,13 @@ public class TipoReciclajeController {
 			return new ResponseEntity<TipoReciclajeModel>(resp,HttpStatus.OK); //pasa un OK
 			
 		}catch(Exception e){
-			throw new JobGreenExeption("Error al listar los puntos de recolección");
+			throw new JobGreenExeption("Error al actualizar los tipos de reciclaje");
 		}
 	}
 	
 	@DeleteMapping("/{id}") 
-	@ApiOperation(value="Actualizar tipo de reciclaje",
-	notes="Método para crear un tipo de reciclaje")
+	@ApiOperation(value="Eliminar tipo de reciclaje",
+	notes="Método Eliminar un tipo de reciclaje")
 	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) Long id)
 			throws JobGreenExeption{
 		try {
@@ -105,7 +107,7 @@ public class TipoReciclajeController {
 			return new ResponseEntity<>(HttpStatus.OK); //pasa un OK
 			
 		}catch(Exception e){
-			throw new JobGreenExeption("Error al listar los puntos de recolección");
+			throw new JobGreenExeption("Error al eliminar tipo de reciclaje");
 		}
 	}
 }

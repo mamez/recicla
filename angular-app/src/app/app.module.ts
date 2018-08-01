@@ -38,8 +38,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { LoguinComponent } from './loguin/loguin.component';
 import { PruebaService } from './services/prueba.service';
 import { DataTablesModule } from '../../node_modules/angular-datatables';
-import { DerpPipe } from './utils/derp.pipe';
 import { FileUploadComponent } from './utils/file-upload/file-upload.component';
+import { ContenidoComponent } from './utils/contenido/contenido.component';
+import { DataTableComponent } from './utils/data-table/data-table.component';
+import { UtilsModule } from './utils/utils.module';
 
 @NgModule({
   imports: [
@@ -54,13 +56,13 @@ import { FileUploadComponent } from './utils/file-upload/file-upload.component';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    DataTablesModule
+    DataTablesModule,
+    UtilsModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
-    LoguinComponent,
-    DerpPipe
+    LoguinComponent
   ],
   providers: [
     PruebaService,

@@ -84,18 +84,22 @@ public class DocServiceImpl implements DocService {
 	 * @see edu.recicla.app.service.DocService#saveImage(edu.recicla.app.model.DocModel)
 	 */
 	@Override
-	public long saveImage(DocModel model) {
+	public DocModel saveImage(DocModel model) {
 		ImagenRepositoy img= new ImagenRepositoy();
 		img.setImagen(model.getImagen());
 		img.setTipo(model.getTipo());
 		img.setLength(model.getLength());
 		String nombre=getNombre(model.getTipoDocumento());
-		img.setNombre(nombre);
 		String extencion=getExtencion(model.getTipo());
-		img.setUrl("/images/"+nombre+"."+extencion);
+		img.setNombre(nombre+"."+extencion);
+		img.setUrl("/resourcess/images/"+img.getNombre());
 		img.setEstado(Long.valueOf("0"));
 		img=imagen.save(img);
-		return img.getId();
+		model.setImagen(new byte[] {});
+		model.setNombre(img.getNombre());
+		model.setUrl(img.getUrl());
+		model.setId(img.getId());
+		return model;
 	}
 	
 	/*Metodo para actualizar el estado de una imagen a el de asociado
@@ -125,7 +129,7 @@ public class DocServiceImpl implements DocService {
 	
    private String getExtencion(String tipo) {
 	   String[] arrString=tipo.split("/");
-	   return arrString[0];
+	   return arrString[1];
    }
 	
 	

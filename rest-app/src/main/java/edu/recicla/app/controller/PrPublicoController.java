@@ -20,10 +20,12 @@ import com.recicla.app.security.JobGreenExeption;
 
 import edu.recicla.app.model.PrPublicoModel;
 import edu.recicla.app.service.PrPublicoService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/prPublico")
+@Api(description="Puntos de recoleccion")
 public class PrPublicoController {
 	
 	@Autowired
@@ -95,15 +97,15 @@ public class PrPublicoController {
 
 	
 	@DeleteMapping("/{id}")
-	@ApiOperation(value = "Actualizar punto publico",
-    notes = "Metodo para Crear un punto de recoleccion publico")
+	@ApiOperation(value = "Eliminar punto publico",
+    notes = "Metodo para eliminar un punto de recoleccion publico")
 	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) Long id) 
 			throws JobGreenExeption{
 		try {
 			prPublicoService.deletePrPublico(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
-			throw new JobGreenExeption("Error al actualizar punto de recoleccion");
+			throw new JobGreenExeption("Error al eliminar punto de recoleccion");
 		}
 	}
 }

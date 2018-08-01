@@ -67,6 +67,7 @@ public class TipsServiceImpl implements TipsService {
 		String nombreImagen=docService.getImage(model.getImagen()).getNombre();
 		if(nombreImagen.equals(model.getImagen())) {
 			tip.setImagen(model.getImagen());
+			docService.updateStateImage(model.getImagen());
 			tipRepository.save(tip);
 		}else {
 			throw new IllegalArgumentException("La imagen enviada no existe en el repositorio de imagenes");
