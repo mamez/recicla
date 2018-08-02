@@ -1,0 +1,52 @@
+<!--Boton para crear un tips-->
+<button type="button" class="btn btn-primary" data-toggle="modal" (click)="largeModal.show()">
+  Crear Tips
+</button>
+
+<!--Modal para crear un tips-->
+ <div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crear Tips</h4>
+        <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="formularioTips"   (submit)="crear(formularioTips.value)" class="form-horizontal">
+      <div class="modal-body">
+          <alert type="danger"  *ngIf="formularioTips.controls.titulo.invalid && formularioTips.controls.titulo.touched">
+              <strong>Error</strong> El valor de campo titulo es incorrecto
+          </alert>
+          <alert type="danger"  *ngIf="formularioTips.controls.descripcion.invalid && formularioTips.controls.descripcion.touched">
+              <strong>Error</strong> El valor de campo titulo es incorrecto
+          </alert>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="hf-email">Titulo</label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="titulo" name="titulo"  formC class="form-control" placeholder="Titulo..">
+                      <span class="help-block">Please enter a complex password</span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-md-3 col-form-label" for="textarea-input">Imagen</label>
+                      <div class="col-md-9">
+                          <app-file-upload (uploadStatus)="refreshImages($event)" [url]="uploadConfig"  ></app-file-upload>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-md-3 col-form-label" for="textarea-input">Descripcion</label>
+                      <div class="col-md-9">
+                        <textarea formControlName="descripcion" rows="9" class="form-control" placeholder="Descripcion.."></textarea>
+                      </div>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="largeModal.hide()">Cancelar</button>
+        <button type="submit" [disabled]="formularioTips.invalid" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+

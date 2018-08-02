@@ -3,12 +3,7 @@
   <app-gmaps></app-gmaps>
 
   <app-file-upload
-      projectId="100"
-      sectionId="107"
-      maxFiles="4"
-      maxSize="2"
-      fileExt="JPG, GIF, PNG"
-      (uploadStatus)="refreshImages($event)" >
+      (uploadStatus)="refreshImages($event)" [service]="service" >
     </app-file-upload>
 
 <app-data-table  [config]="configuracion"  (deleteRow)="eliminarUsuario($event)" (editRow)="editatUsuario($event)" ></app-data-table>

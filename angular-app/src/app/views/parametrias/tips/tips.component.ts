@@ -9,17 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TipsComponent implements OnInit {
   titulo = "Tips";
-  public formularioTips: FormGroup;
+
   configuracion = {};
 
-  constructor(private formBuilder: FormBuilder) {
-    this.formularioTips = this.formBuilder.group({
-      titulo: ['',
-              [ Validators.required, Validators.email ]],
-      descripcion: ['',
-              [Validators.required]]
-    });
-  }
+  constructor() {}
 
   ngOnInit() {
     const apiUrl = environment.api + '/tips';
@@ -36,9 +29,4 @@ export class TipsComponent implements OnInit {
     };
   }
 
-
-  public crear(formValue: any) {
-    console.log(formValue);
-    // { email:'info@angular.io' }
-  }
 }

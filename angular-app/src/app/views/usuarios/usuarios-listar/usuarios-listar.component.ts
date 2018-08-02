@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 export class UsuariosListarComponent implements  OnInit {
 titulo = 'lista usuario';
 configuracion = {};
+service = '';
 
   constructor(private pruebaService: PruebaService) { }
 

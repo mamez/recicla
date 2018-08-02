@@ -11,12 +11,11 @@ export class FileUploadComponent implements OnInit {
 
    errors: Array<string> = [];
     dragAreaClass = 'dragarea';
-    @Input() projectId: number;
-    @Input() sectionId: number;
-    @Input() fileExt = 'JPG, GIF, PNG';
-    @Input() maxFiles = 5;
-    @Input() maxSize = 5; // 5MB
+    fileExt = 'JPG, JPEG';
+    maxFiles = 1;
+    maxSize = 5; // 5MB
     @Output() uploadStatus = new EventEmitter();
+    @Input() url;
 
   constructor(private http: HttpClient) { }
 
@@ -66,20 +65,17 @@ saveFiles(files) {
   if (files.length > 0) {
         const formData: FormData = new FormData();
         for (let j = 0; j < files.length; j++) {
-            formData.append('fileToUpload', files[j], files[j].name);
+            formData.append('file', files[j], files[j].name);
         }
-        const parameters = {
-            projectId: this.projectId,
-            sectionId: this.sectionId
-        };
-        this.upload(formData, parameters)
+        this.upload(formData)
             .subscribe(
             success => {
-              this.uploadStatus.emit(true);
-              console.log(success);
+              this.uploadStatus.emit(success);
+              const objResp: any = success;
+              this.errors.push(objResp.nombre);
             },
             error => {
-                this.uploadStatus.emit(true);
+                this.uploadStatus.emit(error);
                 this.errors.push(error.ExceptionMessage);
             });
     }
@@ -88,7 +84,7 @@ saveFiles(files) {
 private isValidFiles(files) {
   // Check Number of files
    if (files.length > this.maxFiles) {
-       this.errors.push('Error: At a time you can upload only ' + this.maxFiles + ' files');
+       this.errors.push('Error: No se puede subir mas de ' + this.maxFiles + ' Archivos');
        return;
    }
    this.isValidFileExtension(files);
@@ -108,7 +104,7 @@ private isValidFileExtension(files) {
         // Check the extension exists
         const exists = extensions.includes(ext);
         if (!exists) {
-            this.errors.push('Error (Extension): ' + files[i].name);
+            this.errors.push('Error Extension no vaida: ' + files[i].name);
         }
         // Check file size
         this.isValidFileSize(files[i]);
@@ -120,14 +116,13 @@ private isValidFileSize(file) {
     const fileSizeinMB = file.size / (1024 * 1000);
     const size = Math.round(fileSizeinMB * 100) / 100; // convert upto 2 decimal place
     if (size > this.maxSize) {
-      this.errors.push('Error (File Size): ' + file.name + ': exceed file size limit of ' + this.maxSize + 'MB ( ' + size + 'MB )');
+      this.errors.push('Error el archivo: ' + file.name + ': Supera el limite de los ' + this.maxSize + 'MB ( ' + size + 'MB )');
     }
 }
 
-upload(files, parameters) {
-  //let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+upload(files) {
   const headers = new HttpHeaders();
-  return  this.http.post('http://localhost/upload/upload.php', files, {headers: headers});
+  return  this.http.post(this.url, files, {headers: headers});
 }
 
 }

@@ -10,6 +10,7 @@ import { UtilsModule } from "../../utils/utils.module";
 import { ModalModule} from 'ngx-bootstrap/modal';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from "../../../../node_modules/@angular/forms";
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { TipsCrearComponent } from './tips/tips-crear/tips-crear.component';
 
 @NgModule({
   imports: [CommonModule, ParametriasRoutingModule, FormsModule, ReactiveFormsModule,
@@ -17,7 +18,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
   declarations: [
     PromocionesComponent,
     TipoRevciclajeComponent,
-    TipsComponent
+    TipsComponent,
+    TipsCrearComponent
   ],
   providers: [FormBuilder]
 })
