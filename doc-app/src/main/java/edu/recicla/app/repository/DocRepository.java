@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import edu.recicla.app.entity.ImagenRepositoy;
 
 @Repository
-public interface DocRepository extends CrudRepository<ImagenRepositoy, String>{
+public interface DocRepository extends CrudRepository<ImagenRepositoy, Long>{
 	List<ImagenRepositoy> findByNombre(String nombre);
 	
 	@Modifying

@@ -1,34 +1,60 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { first } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { HttpClient } from '../../../../node_modules/@angular/common/http';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from "@angular/core";
+import { Subject } from "rxjs";
+import { HttpClient } from "../../../../node_modules/@angular/common/http";
+import { DataTableDirective } from "../../../../node_modules/angular-datatables";
 
 @Component({
-  selector: 'app-data-table',
-  templateUrl: './data-table.component.html',
+  selector: "app-data-table",
+  templateUrl: "./data-table.component.html",
   styles: []
 })
-export class DataTableComponent implements OnDestroy, OnInit {
-  @Output()
-  deleteRow: EventEmitter<any> = new EventEmitter<any>();
+export class DataTableComponent
+  implements OnChanges, OnDestroy, OnInit, AfterViewInit {
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
-  @Output()
-  editRow: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteRow: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input()
-  config: any = {};
+  @Output() editRow: EventEmitter<any> = new EventEmitter<any>();
+
+  @Input() config: any = {};
 
   dtTrigger: Subject<any> = new Subject();
   listData: object = [];
 
-
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-   this.http.get(this.config.url).subscribe(data => {
-    this.listData = data;
+    this.http.get(this.config.url).subscribe(data => {
+      this.listData = data;
+    });
+    console.log("init1");
+  }
+
+  ngAfterViewInit(): void {
     this.dtTrigger.next();
-  });
+    console.log("init2");
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // tslint:disable-next-line:forin
+    for (const propName in changes) {
+      const change = changes[propName];
+      const isReloat = change.currentValue.reload;
+      if (isReloat) {
+        this.rerender();
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -43,4 +69,12 @@ export class DataTableComponent implements OnDestroy, OnInit {
     this.editRow.emit(data);
   }
 
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      // this.dtTrigger.next();
+    });
+  }
 }

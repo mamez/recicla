@@ -1,0 +1,19 @@
+<div bsModal #modalEliminar="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Eliminar Tips</h4>
+        <button type="button" class="close" (click)="modalEliminar.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Esta seguro de eliminar el tips: {{model.id}} ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalEliminar.hide()">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="elimarTips()">Aseptar</button>
+      </div>
+    </div>
+  </div>
+</div>

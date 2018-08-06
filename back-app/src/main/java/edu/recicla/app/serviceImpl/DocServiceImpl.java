@@ -27,7 +27,7 @@ public class DocServiceImpl implements DocService {
 	@Override
 	public DocModel getImage(long id) {
 		DocModel model= null;
-		Optional<ImagenRepositoy> optionalImage =imagen.findById(Long.toString(id));
+		Optional<ImagenRepositoy> optionalImage =imagen.findById(id);
 		if(optionalImage.isPresent()){
 			ImagenRepositoy img=optionalImage.get();
 			model=new DocModel();
@@ -66,9 +66,13 @@ public class DocServiceImpl implements DocService {
 	 */
 	@Override
 	public void deleteImage(long id) {
-		boolean existe=imagen.existsById(Long.toString(id));
+		try {
+		boolean existe=imagen.existsById(id);
 		if(existe) {
-			imagen.deleteById(Long.toString(id));
+			imagen.deleteById(id);
+		}
+		}catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 	

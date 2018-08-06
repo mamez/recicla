@@ -8,18 +8,16 @@
     "github": "https://github.com/mrholek",
     "twitter": "https://twitter.com/lukaszholeczek"
   },
-  "contributors": [
-    {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
-    }
-  ],
+  "contributors": [{
+    "name": "Andrzej Kopański",
+    "url": "https://github.com/xidedix"
+  }],
   "homepage": "https://coreui.io/angular",
   "copyright": "Copyright 2018 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --port 3000  --proxy-config proxy.conf.json",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",

@@ -106,7 +106,8 @@ public class TipsServiceImpl implements TipsService {
 	public void deleteTips(Long id) {
 		Optional<Tip> tipOptional= tipRepository.findById(id);
 		if(tipOptional.isPresent()) {
-			docService.deleteImagenByName(tipOptional.get().getImagen());
+			DocModel dm= docService.getImage(tipOptional.get().getImagen());
+			docService.deleteImage(dm.getId());
 			tipRepository.delete(tipOptional.get());
 		}
 		

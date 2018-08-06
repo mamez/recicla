@@ -1,4 +1,32 @@
 <app-contenido [titulo]="titulo">
-    <app-tips-crear></app-tips-crear>
-    <app-data-table  [config]="configuracion" ></app-data-table>
+  <app-tips-crear (estadoGuardado)="estadoGuardado($event)"></app-tips-crear>
+  <app-tips-eliminar (estadoEliminado)="estadoEliminado($event)"></app-tips-eliminar>
+  <app-tips-modificar></app-tips-modificar>
+  <table datatable [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Titulo</th>
+        <th>Descripcion</th>
+        <th>Imagen</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of listData">
+        <td>{{data.id}}</td>
+        <td>{{data.titulo}}</td>
+        <td>{{data.descripcion}}</td>
+        <td>{{data.imagen}}</td>
+        <td style="width: 100px;">
+          <button (click)="deleteElemt(data)" class="btn btn-primary float-left" type="button">
+            <i class="icon-trash icons"></i>
+          </button>
+          <button (click)="editElemt(data)" class="btn btn-primary float-right" type="button">
+            <i class="icon-pencil icons"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </app-contenido>
