@@ -16,29 +16,39 @@ import { TipsService } from "../../../../services/tips.service";
 export class TipsEliminarComponent implements OnInit {
   @ViewChild("modalEliminar") modal: any;
   model: TipsModel = new TipsModel();
-  @Output() estadoEliminado: EventEmitter<any> = new EventEmitter<any>();
+  context: Map<string, any>;
 
   constructor(private tipsService: TipsService) {
-    this.tipsService.popup.subscribe(val => {
-      this.openModal(val);
+    this.tipsService.contextoService.subscribe(val => {
+      this.initContext(val);
     });
+  }
+
+  private initContext(data: Map<string, any>) {
+    const accion = data.get('accion');
+    switch (accion) {
+      case 'eliminar': {
+        this.model = data.get("data");
+        this.modal.show();
+        break;
+      }
+    }
   }
 
   ngOnInit() {}
 
   public elimarTips() {
-    console.log(this.model);
     this.tipsService.deleteTips(this.model.id).subscribe(data => {
-      this.estadoEliminado.emit(true);
-      this.modal.hide();
+       this.closeModal(data);
     });
   }
 
-  private openModal(data: Map<string, any>) {
-    const accion = data.get('accion');
-    if (accion === 'eliminar') {
-      this.model = data.get("data");
-      this.modal.show();
-    }
+  private closeModal(data: any) {
+    this.modal.hide();
+    this.context = new Map<string, any>();
+    this.context.set('accion' , 'listar');
+    this.context.set('evento' , 'eliminado');
+    this.tipsService.contextoService.next(this.context);
   }
+
 }

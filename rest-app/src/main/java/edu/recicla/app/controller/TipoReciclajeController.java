@@ -24,7 +24,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/TipoReciclaje")
+@RequestMapping("/tipoReciclaje")
 @Api(description="Tipo Reciclaje")
 public class TipoReciclajeController {
 	

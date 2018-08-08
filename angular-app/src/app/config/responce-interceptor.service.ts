@@ -20,7 +20,7 @@ export class ResponceInterceptorService implements HttpInterceptor {
       .handle(request)
       .do((ev: HttpEvent<any>) => {
         if (ev instanceof HttpResponse) {
-          console.log('processing response', ev);
+         // console.log('processing response', ev);
         }
       });
   }

@@ -17,6 +17,9 @@ import { TipsCrearComponent } from "./tips/tips-crear/tips-crear.component";
 import { TipsComponent } from "./tips/tips.component";
 import { TipsEliminarComponent } from './tips/tips-eliminar/tips-eliminar.component';
 import { TipsModificarComponent } from './tips/tips-modificar/tips-modificar.component';
+import { TipoRecCrearComponent } from './tipo-revciclaje/tipo-rec-crear/tipo-rec-crear.component';
+import { TipoRecModificatComponent } from './tipo-revciclaje/tipo-rec-modificat/tipo-rec-modificat.component';
+import { TipoRecEliminarComponent } from './tipo-revciclaje/tipo-rec-eliminar/tipo-rec-eliminar.component';
 
 @NgModule({
   imports: [
@@ -36,7 +39,10 @@ import { TipsModificarComponent } from './tips/tips-modificar/tips-modificar.com
     TipsComponent,
     TipsCrearComponent,
     TipsEliminarComponent,
-    TipsModificarComponent
+    TipsModificarComponent,
+    TipoRecCrearComponent,
+    TipoRecModificatComponent,
+    TipoRecEliminarComponent
   ],
   providers: [FormBuilder]
 })

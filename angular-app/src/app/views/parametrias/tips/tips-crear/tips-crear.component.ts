@@ -1,11 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
   Validators
 } from "../../../../../../node_modules/@angular/forms";
-import { Router } from "../../../../../../node_modules/@angular/router";
-import { ModalDirective } from "../../../../../../node_modules/ngx-bootstrap/modal";
 import { TipsModel } from "../../../../model/tips-model";
 import { TipsService } from "../../../../services/tips.service";
 
@@ -18,14 +16,11 @@ export class TipsCrearComponent implements OnInit {
   public formularioTips: FormGroup;
   public nombreImagen: string;
   public uploadConfig = "/jobGreen/resourcess/images/upload/TIPS_MODEL";
-  public modal: ModalDirective;
-  @Output() estadoGuardado: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private tipsService: TipsService,
-    private router: Router
-  ) {}
+  @ViewChild("largeModal") modal: any;
+  context: Map<string, any>;
+
+  constructor(private formBuilder: FormBuilder, private tipsService: TipsService) {}
 
   ngOnInit() {
     this.formularioTips = this.formBuilder.group({
@@ -49,12 +44,11 @@ export class TipsCrearComponent implements OnInit {
   }
 
   tipsGuargadoOK(data: any) {
+    this.context = new Map<string, any>();
+    this.context.set('accion' , 'listar');
+    this.context.set('evento' , 'creado');
+    this.tipsService.contextoService.next(this.context);
     this.modal.hide();
-    this.estadoGuardado.emit(true);
-    // this.ngOnInit();
   }
 
-  setModal($event: ModalDirective) {
-    this.modal = $event;
-  }
 }

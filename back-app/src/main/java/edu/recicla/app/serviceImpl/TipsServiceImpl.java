@@ -35,8 +35,12 @@ public class TipsServiceImpl implements TipsService {
 			resp.setTitulo(tip.getTitulo());
 			resp.setDescripcion(tip.getDescripcion());
 			resp.setImagen(tip.getImagen());
+			try {
 			DocModel model=docService.getImage(tip.getImagen());
     		    resp.setImagenUrl(model.getUrl());
+			}catch (Exception e) {
+				resp.setImagenUrl("no encontrada");
+			}
 			lisResp.add(resp);
 		}
 		return lisResp;
@@ -53,8 +57,13 @@ public class TipsServiceImpl implements TipsService {
 	    		resp.setTitulo(tip.getTitulo());
 	    		resp.setDescripcion(tip.getDescripcion());
 	    		resp.setImagen(tip.getImagen());
+	    		try {
 	    		DocModel model=docService.getImage(tip.getImagen());
-	    		resp.setImagenUrl(model.getUrl());
+	    			resp.setImagenUrl(model.getUrl());
+	    		}catch (Exception e) {
+	    			resp.setImagenUrl("url no encontrada");
+			}
+	    		
 	    }
 		return resp;
 	}
@@ -106,9 +115,14 @@ public class TipsServiceImpl implements TipsService {
 	public void deleteTips(Long id) {
 		Optional<Tip> tipOptional= tipRepository.findById(id);
 		if(tipOptional.isPresent()) {
-			DocModel dm= docService.getImage(tipOptional.get().getImagen());
-			docService.deleteImage(dm.getId());
 			tipRepository.delete(tipOptional.get());
+			try {
+				DocModel dm= docService.getImage(tipOptional.get().getImagen());
+				docService.deleteImage(dm.getId());
+			}catch (Exception e) {
+				System.out.println("La imagen no se encontro");
+			}
+			
 		}
 		
 	}

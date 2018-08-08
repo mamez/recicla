@@ -1,6 +1,9 @@
 <app-contenido [titulo]="titulo">
-  <app-tips-crear (estadoGuardado)="estadoGuardado($event)"></app-tips-crear>
-  <app-tips-eliminar (estadoEliminado)="estadoEliminado($event)"></app-tips-eliminar>
+    <div *ngFor="let alert of alertas">
+        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+      </div>
+  <app-tips-crear></app-tips-crear>
+  <app-tips-eliminar></app-tips-eliminar>
   <app-tips-modificar></app-tips-modificar>
   <table datatable [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
     <thead>

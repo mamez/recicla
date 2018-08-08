@@ -26,10 +26,7 @@ import { UtilsModule } from '../../utils/utils.module';
   ],
     declarations: [UsuariosListarComponent],
   providers: [
-  PruebaService,
-  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ResponceInterceptorService, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true }
+  PruebaService
   ]
 })
 export class UsuariosModule { }

@@ -3,6 +3,7 @@ import { DataTableDirective } from "../../../../../node_modules/angular-datatabl
 import { Subject } from "../../../../../node_modules/rxjs";
 import { TipsModel } from "../../../model/tips-model";
 import { TipsService } from "../../../services/tips.service";
+import { AlertModel, alertType } from "../../../model/alert-model";
 
 @Component({
   selector: "app-tips",
@@ -15,14 +16,47 @@ export class TipsComponent implements OnInit, OnDestroy {
   configuracion: any = {};
   listData: Array<TipsModel>;
   context: Map<string, string>;
+  alertas: any = [];
+  alert: AlertModel;
 
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   dtTrigger: Subject<TipsModel> = new Subject();
 
-  constructor(private tipsServices: TipsService) {}
+  constructor(private tipsServices: TipsService) {
+    this.tipsServices.contextoService.subscribe(val => {
+      console.log(val);
+      this.initContext(val);
+    });
+  }
+
+  private initContext(data: Map<string, any>) {
+    const accion = data.get('accion');
+    if (accion === 'listar') {
+      const evento = data.get('evento');
+      this.resetdata();
+      switch (evento) {
+        case 'creado': {
+          this.alert = new AlertModel('Registro creado con éxito', true, alertType.SUCCESS);
+          break;
+        }
+        case 'modificado': {
+          this.alert = new AlertModel('Registro modificado con éxito', true, alertType.SUCCESS);
+          break;
+        }
+        case 'eliminado': {
+          this.alert = new AlertModel('Registro eliminado con éxito', true, alertType.SUCCESS);
+           break;
+         }
+      }
+      this.alertas.push({
+        type: this.alert.type,
+        msg: this.alert.msg,
+        timeout: 5000
+      });
+    }
+  }
 
   ngOnInit() {
-    const apiUrl = "jobGreen/tips";
     this.tipsServices.getListTips().subscribe(data => {
       this.listData = data;
       this.dtTrigger.next();
@@ -33,17 +67,8 @@ export class TipsComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
-  estadoGuardado($event) {
-    const mapdata = new Map<string, any>();
-    this.tipsServices.getListTips().subscribe(data => {
-      this.listData = data;
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.destroy();
-        this.dtTrigger.next();
-      });
-    });
-  }
-  estadoEliminado($event) {
+
+  resetdata() {
     const mapdata = new Map<string, any>();
     this.tipsServices.getListTips().subscribe(data => {
       this.listData = data;
@@ -58,12 +83,12 @@ export class TipsComponent implements OnInit, OnDestroy {
     this.context = new Map<string, any>();
     this.context.set("accion", "eliminar");
     this.context.set("data", data);
-    this.tipsServices.popup.next(this.context);
+    this.tipsServices.contextoService.next(this.context);
   }
   editElemt(data) {
     this.context = new Map<string, any>();
     this.context.set("accion", "modificar");
     this.context.set("data", data);
-    this.tipsServices.popup.next(this.context);
+    this.tipsServices.contextoService.next(this.context);
   }
 }

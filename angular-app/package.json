@@ -8,10 +8,12 @@
     "github": "https://github.com/mrholek",
     "twitter": "https://twitter.com/lukaszholeczek"
   },
-  "contributors": [{
-    "name": "Andrzej Kopański",
-    "url": "https://github.com/xidedix"
-  }],
+  "contributors": [
+    {
+      "name": "Andrzej Kopański",
+      "url": "https://github.com/xidedix"
+    }
+  ],
   "homepage": "https://coreui.io/angular",
   "copyright": "Copyright 2018 creativeLabs Łukasz Holeczek",
   "license": "MIT",
@@ -40,6 +42,7 @@
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.2.0",
     "@coreui/icons": "^0.3.0",
     "angular-datatables": "^6.0.0",
+    "angular4-notify": "^1.2.0",
     "bootstrap": "^4.1.2",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.7",

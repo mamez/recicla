@@ -9,13 +9,29 @@ import { TipsService } from '../../../../services/tips.service';
   styles: []
 })
 export class TipsModificarComponent implements OnInit {
+
   public formularioTips: FormGroup;
   @ViewChild("modificarModal") modal: any;
-  model: TipsModel = new TipsModel();
+  public model: TipsModel = new TipsModel();
+  context: Map<string, any>;
+
   constructor(private formBuilder: FormBuilder, private tipsService: TipsService) {
-    this.tipsService.popup.subscribe(val => {
-      this.openModal(val);
+    this.tipsService.contextoService.subscribe(val => {
+      this.initContext(val);
     });
+  }
+
+  private initContext(data: Map<string, any>) {
+    const accion = data.get('accion');
+    switch (accion) {
+      case 'modificar': {
+        this.model = data.get("data");
+        this.formularioTips.controls['titulo'].setValue(this.model.titulo);
+        this.formularioTips.controls['descripcion'].setValue(this.model.descripcion);
+        this.modal.show();
+        break;
+      }
+    }
   }
 
   ngOnInit() {
@@ -30,19 +46,19 @@ export class TipsModificarComponent implements OnInit {
      this.model.descripcion = formValue.descripcion;
      this.tipsService.updateTips(this.model)
        .subscribe(
-        this.modal.hide()
+         this.closeModal.bind(this)
        );
   }
 
-  private openModal(data: Map<string, any>) {
-    const accion = data.get('accion');
-    if (accion === 'modificar') {
-      this.model = data.get("data");
-      this.formularioTips.controls['titulo'].setValue(this.model.titulo);
-      this.formularioTips.controls['descripcion'].setValue(this.model.descripcion);
-      this.modal.show();
-    }
+  private closeModal(data: any) {
+    this.modal.hide();
+    this.context = new Map<string, any>();
+    this.context.set('accion' , 'listar');
+    this.context.set('evento' , 'modificado');
+    this.tipsService.contextoService.next(this.context);
   }
+
+
 
 
 }

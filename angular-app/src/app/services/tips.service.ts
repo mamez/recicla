@@ -8,7 +8,7 @@ import { TipsModel } from "../model/tips-model";
 })
 export class TipsService {
   private URL_BASE = "/jobGreen/tips";
-  public popup: Subject<Map<string, any>> = new Subject<Map<string, any>>();
+  public contextoService: Subject<Map<string, any>> = new Subject<Map<string, any>>();
 
   constructor(private http: HttpClient) {}
 
