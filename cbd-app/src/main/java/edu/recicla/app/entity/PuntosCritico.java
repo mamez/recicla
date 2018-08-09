@@ -40,7 +40,7 @@ public class PuntosCritico implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="usuario")
-	private Usuario usuarioBean;
+	private Usuario usuario;
 
 	public PuntosCritico() {
 	}
@@ -117,12 +117,14 @@ public class PuntosCritico implements Serializable {
 		this.observacionUser = observacionUser;
 	}
 
-	public Usuario getUsuarioBean() {
-		return this.usuarioBean;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuarioBean(Usuario usuarioBean) {
-		this.usuarioBean = usuarioBean;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
+
+	
 
 }

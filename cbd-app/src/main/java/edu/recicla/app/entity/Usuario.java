@@ -154,14 +154,14 @@ public class Usuario implements Serializable {
 
 	public PuntosCritico addPuntosCritico(PuntosCritico puntosCritico) {
 		getPuntosCriticos().add(puntosCritico);
-		puntosCritico.setUsuarioBean(this);
+		puntosCritico.setUsuario(this);
 
 		return puntosCritico;
 	}
 
 	public PuntosCritico removePuntosCritico(PuntosCritico puntosCritico) {
 		getPuntosCriticos().remove(puntosCritico);
-		puntosCritico.setUsuarioBean(null);
+		puntosCritico.setUsuario(null);
 
 		return puntosCritico;
 	}
