@@ -13,7 +13,11 @@ import java.util.List;
 @Entity
 @Table(name="solicitud_recoleccion")
 public class SolicitudRecoleccion implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -44,7 +48,7 @@ public class SolicitudRecoleccion implements Serializable {
 	private List<DetalleSolicitud> detalleSolicituds;
 
 	//bi-directional many-to-one association to PrUsuario
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="punto_recoleccion")
 	private PrUsuario prUsuario;
 

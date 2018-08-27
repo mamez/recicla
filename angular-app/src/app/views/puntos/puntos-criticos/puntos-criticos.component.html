@@ -1,3 +1,71 @@
-<p>
-  puntos-criticos works!
-</p>
+<app-contenido [titulo]="title">
+    <div *ngFor="let alert of alertas">
+        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+      </div>
+  <agm-map style="height: 600px;" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+      <agm-marker *ngFor="let data of listData" [latitude]="+data.lat" [longitude]="+data.lng">
+          <agm-snazzy-info-window    [maxWidth]="400" [closeWhenOthersOpen]="true">
+              <ng-template>
+                <h4>{{data.direccion}}</h4>
+                <p>{{data.observacionUser}}</p>
+                <button (click)="openModal(data)" >Ver detalle</button>
+              </ng-template>
+            </agm-snazzy-info-window>
+      </agm-marker>
+  </agm-map>
+
+  <!--Modal para crear un tips-->
+<div bsModal #modalDetalle="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Descripcion punto critico</h4>
+          <button type="button" class="close" (click)="modalDetalle.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+              <div class="form-group row">
+                  <div class="col-md-9" style="text-align: center;">
+                      <img  *ngIf="puntoCritico.imagen"  src="/jobGreen/resourcess/images/{{puntoCritico.imagen}}" >
+                    </div>
+                  </div>
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label" >Direccion</label>
+                  <div class="col-md-9">
+                      <label class="col-md-9 col-form-label" >{{puntoCritico.direccion}}</label>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" >Fecha reporte</label>
+                    <div class="col-md-9">
+                        <label class="col-md-9 col-form-label" >{{puntoCritico.fechaReporte}}</label>
+                    </div>
+                  </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" >Estado</label>
+              <div class="col-md-9">
+                  <label class="col-md-9 col-form-label" >{{puntoCritico.estado}}</label>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" >Observacion</label>
+                <div class="col-md-9">
+                    <label class="col-md-9 col-form-label" >{{puntoCritico.observacionUser}}</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-md-3 col-form-label" >Descripcion evento</label>
+                  <div class="col-md-9">
+                      <input type="text" [(ngModel)]="puntoCritico.observacionAdmin" id="nombre" name="nombre"  class="form-control" placeholder="Descripcion..">
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" (click)="rechazar()" class="btn btn-primary">Rechazar</button>
+            <button type="submit" (click)="atender()" class="btn btn-primary">Atender</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</app-contenido>

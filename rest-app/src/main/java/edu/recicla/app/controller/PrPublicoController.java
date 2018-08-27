@@ -20,20 +20,15 @@ import com.recicla.app.security.JobGreenExeption;
 
 import edu.recicla.app.model.PrPublicoModel;
 import edu.recicla.app.service.PrPublicoService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/prPublico")
-@Api(description="Puntos de recoleccion")
 public class PrPublicoController {
 	
 	@Autowired
 	PrPublicoService prPublicoService;
 	
 	@GetMapping
-	@ApiOperation(value = "Puntos publicos",
-		    notes = "Metodo para obtener todos los puntos de recoleccion publicos")
 	public ResponseEntity<List<PrPublicoModel>> grtAll() throws JobGreenExeption{
 		try {
 			List<PrPublicoModel> resp=prPublicoService.getAllPrPublico();
@@ -48,8 +43,6 @@ public class PrPublicoController {
 	}
 	
 	@GetMapping("/{id}")
-	@ApiOperation(value = "Obtener punto publicos",
-		    notes = "Metodo para obtener un punto de recoleccion publico")
 	public ResponseEntity<PrPublicoModel> getSingle(@PathVariable(name="id", required=true) Long id)
 			throws JobGreenExeption{
 		try {
@@ -65,8 +58,6 @@ public class PrPublicoController {
 	}
 	
 	@PostMapping
-	@ApiOperation(value = "Crear punto publico",
-    notes = "Metodo para Crear un punto de recoleccion publico")
 	public ResponseEntity<PrPublicoModel> save(@RequestBody @Valid PrPublicoModel model)
 			throws JobGreenExeption{
 		try {
@@ -82,8 +73,6 @@ public class PrPublicoController {
 	}
 	
 	@PutMapping("/{id}")
-	@ApiOperation(value = "Actualizar punto publico",
-    notes = "Metodo para Crear un punto de recoleccion publico")
 	public ResponseEntity<PrPublicoModel> update(@RequestBody @Valid PrPublicoModel model,
 			@PathVariable(name="id", required=true) Long id) throws JobGreenExeption{
 		try {
@@ -97,8 +86,6 @@ public class PrPublicoController {
 
 	
 	@DeleteMapping("/{id}")
-	@ApiOperation(value = "Eliminar punto publico",
-    notes = "Metodo para eliminar un punto de recoleccion publico")
 	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) Long id) 
 			throws JobGreenExeption{
 		try {

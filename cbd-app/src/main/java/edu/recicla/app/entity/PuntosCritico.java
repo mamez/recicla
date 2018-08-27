@@ -1,7 +1,27 @@
 package edu.recicla.app.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.recicla.app.enums.EstadoPuntoRecoleccion;
+
+import edu.recicla.app.repository.JsonDateSerializer;
 
 
 /**
@@ -11,25 +31,36 @@ import javax.persistence.*;
 @Entity
 @Table(name="puntos_criticos")
 public class PuntosCritico implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	private String estado;
+	@Enumerated(EnumType.STRING)
+	private EstadoPuntoRecoleccion estado;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_recoleccion")
-	private String fechaRecoleccion;
+	@JsonSerialize(using=JsonDateSerializer.class) 
+	private java.util.Date fechaRecoleccion;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_reporte")
-	private String fechaReporte;
+	@JsonSerialize(using=JsonDateSerializer.class) 
+	private java.util.Date fechaReporte;
 
 	private String imagen;
 
 	private String lat;
 
 	private String lng;
+	
+	private String direccion;
 
 	@Column(name="observacion_admin")
 	private String observacionAdmin;
@@ -38,9 +69,20 @@ public class PuntosCritico implements Serializable {
 	private String observacionUser;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="usuario")
 	private Usuario usuario;
+	
+	@PrePersist
+    public void prePersist() {
+        this.estado= EstadoPuntoRecoleccion.EN_PROCESO;
+        this.fechaReporte = new Date();
+    }
+	
+	@PreUpdate()
+	public void preUpdate() {
+		this.fechaRecoleccion= new Date();
+	}
 
 	public PuntosCritico() {
 	}
@@ -53,29 +95,6 @@ public class PuntosCritico implements Serializable {
 		this.id = id;
 	}
 
-	public String getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getFechaRecoleccion() {
-		return this.fechaRecoleccion;
-	}
-
-	public void setFechaRecoleccion(String fechaRecoleccion) {
-		this.fechaRecoleccion = fechaRecoleccion;
-	}
-
-	public String getFechaReporte() {
-		return this.fechaReporte;
-	}
-
-	public void setFechaReporte(String fechaReporte) {
-		this.fechaReporte = fechaReporte;
-	}
 
 	public String getImagen() {
 		return this.imagen;
@@ -85,21 +104,7 @@ public class PuntosCritico implements Serializable {
 		this.imagen = imagen;
 	}
 
-	public String getLat() {
-		return this.lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public String getLng() {
-		return this.lng;
-	}
-
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
+	
 
 	public String getObservacionAdmin() {
 		return this.observacionAdmin;
@@ -123,6 +128,57 @@ public class PuntosCritico implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	
+
+	
+	public java.util.Date getFechaRecoleccion() {
+		return fechaRecoleccion;
+	}
+
+	public void setFechaRecoleccion(java.util.Date fechaRecoleccion) {
+		this.fechaRecoleccion = fechaRecoleccion;
+	}
+
+	public java.util.Date getFechaReporte() {
+		return fechaReporte;
+	}
+
+	public void setFechaReporte(java.util.Date fechaReporte) {
+		this.fechaReporte = fechaReporte;
+	}
+
+	public EstadoPuntoRecoleccion getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoPuntoRecoleccion estado) {
+		this.estado = estado;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
 	}
 
 	

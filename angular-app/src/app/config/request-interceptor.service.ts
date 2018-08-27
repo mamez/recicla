@@ -12,7 +12,7 @@ export class RequestInterceptorService implements HttpInterceptor {
 
     // add a custom header
     const customReq = request.clone({
-      headers: request.headers.set('app-language', 'it')
+     // headers: request.headers.set('app-language', 'it')
     });
 
     // pass on the modified request object

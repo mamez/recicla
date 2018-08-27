@@ -1,11 +1,11 @@
 package edu.recicla.app.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import edu.recicla.app.entity.PrUsuario;
 
-@Repository
-public interface PrUsuarioRepository extends CrudRepository< PrUsuario, Long>{
+@RepositoryRestResource(collectionResourceRel = "puntosUsuarios", path = "puntosUsuarios")
+public interface PrUsuarioRepository extends PagingAndSortingRepository< PrUsuario, Long>{
 
 }

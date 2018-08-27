@@ -105,6 +105,12 @@ public class PromocionServicesImpl implements PromocionServices {
 	public boolean deletePromocion(Long id) {
 		Optional<Promocion> optionalpromocion= promocionRepository.findById(id);
 		if(optionalpromocion.isPresent()) {
+			Promocion promocion=optionalpromocion.get();
+			try {
+			docService.deleteImagenByName(promocion.getImagen());
+			}catch (Exception e) {
+				System.out.println("no se pudo borrar la imagen");
+			}
 			promocionRepository.deleteById(id);
 			return true;
 		}else {

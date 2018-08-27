@@ -20,12 +20,12 @@ export const navItems = [
       children: [
         {
           name: 'Usuarios',
-          url: '/puntos/rec-publicos',
+          url: '/puntos/rec-usuarios',
           icon: 'icon-trash'
         },
         {
           name: 'Publicos',
-          url: '/puntos/rec-usuarios',
+          url: '/puntos/rec-publicos',
           icon: 'icon-trash'
         }
       ]

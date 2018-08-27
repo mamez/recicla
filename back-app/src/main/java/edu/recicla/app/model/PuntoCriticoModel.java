@@ -1,51 +1,39 @@
 package edu.recicla.app.model;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
+import java.util.Date;
 
-import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotNull;
 
 public class PuntoCriticoModel {
 	
-	@ApiModelProperty(notes="Id del pinto critoco",required=false)
 	private Long id;
 
 	
-	@ApiModelProperty(notes="Descripción del tipo de reciclaje",required=false)
 	private String estado;
 
 	
-	@ApiModelProperty(notes="Fecha de recoleccion puesta por el administrado",required=false)
-	private String fechaRecoleccion;
+	private Date fechaRecoleccion;
 
-	@ApiModelProperty(notes="Fecha en la que se realizo el reporte",required=false)
-	private String fechaReporte;
+	private Date fechaReporte;
 
 	@NotNull(message="El campo imagen es requerido")
-	@ApiModelProperty(notes="nombre de la imagen del punto critico",required=true)
 	private String imagen;
 
 	@NotNull(message="El campo lat es requerido")
-	@ApiModelProperty(notes="Latitud del reporte ",required=true)
-	private String lat;
+	private double lat;
 
 	@NotNull(message="El campo lng es equerido")
-	@ApiModelProperty(notes="longitud del reporte",required=true)
-	private String lng;
+	private double lng;
 	
 	@NotNull(message="El campo usuario es equerido")
-	@ApiModelProperty(notes="Id del usuario que reporta el punto critico",required=true)
-	private Long usuario;
+	private UsuarioModel usuario;
 	
 	
-	@ApiModelProperty(notes="Url de la imagen",required=false)
 	private String UrlImagen;
 	
-	@ApiModelProperty(notes="Obserbacion de administrador",required=false)
 	private String observacionAdmin;
 
 	@NotNull(message="El campo observacionUser es equerido")
-	@ApiModelProperty(notes="Obserbacion de usuario",required=true)
 	private String observacionUser;
 
 	public Long getId() {
@@ -64,21 +52,7 @@ public class PuntoCriticoModel {
 		this.estado = estado;
 	}
 
-	public String getFechaRecoleccion() {
-		return fechaRecoleccion;
-	}
-
-	public void setFechaRecoleccion(String fechaRecoleccion) {
-		this.fechaRecoleccion = fechaRecoleccion;
-	}
-
-	public String getFechaReporte() {
-		return fechaReporte;
-	}
-
-	public void setFechaReporte(String fechaReporte) {
-		this.fechaReporte = fechaReporte;
-	}
+	
 
 	public String getImagen() {
 		return imagen;
@@ -88,29 +62,6 @@ public class PuntoCriticoModel {
 		this.imagen = imagen;
 	}
 
-	public String getLat() {
-		return lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public String getLng() {
-		return lng;
-	}
-
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-
-	public Long getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Long usuario) {
-		this.usuario = usuario;
-	}
 
 	public String getUrlImagen() {
 		return UrlImagen;
@@ -135,5 +86,47 @@ public class PuntoCriticoModel {
 	public void setObservacionUser(String observacionUser) {
 		this.observacionUser = observacionUser;
 	}
+
+	public Date getFechaRecoleccion() {
+		return fechaRecoleccion;
+	}
+
+	public void setFechaRecoleccion(Date fechaRecoleccion) {
+		this.fechaRecoleccion = fechaRecoleccion;
+	}
+
+	public Date getFechaReporte() {
+		return fechaReporte;
+	}
+
+	public void setFechaReporte(Date fechaReporte) {
+		this.fechaReporte = fechaReporte;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public double getLng() {
+		return lng;
+	}
+
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+
+	public UsuarioModel getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioModel usuario) {
+		this.usuario = usuario;
+	}
+
+	
 
 }

@@ -21,19 +21,14 @@ import com.recicla.app.security.JobGreenExeption;
 import edu.recicla.app.model.DocModel;
 import edu.recicla.app.model.DocType;
 import edu.recicla.app.service.DocService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/resourcess/images")
-@Api(description="Upload images")
 public class UploadImagesController {
 	
 	@Autowired
 	DocService docService;
 	
 	@RequestMapping(value="/upload/{tipo}", method=RequestMethod.POST)
-	@ApiOperation(value = "Upload",
-    notes = "Metodo para Guardar una imagen")
 	public ResponseEntity<DocModel> uploadImage(@RequestPart(value="file", required=true) MultipartFile file,
 			@PathVariable @NotNull DocType tipo) throws JobGreenExeption {
 		if(file != null) {
@@ -54,8 +49,6 @@ public class UploadImagesController {
 	return null;
 	}
 	
-	@ApiOperation(value = "Upload",
-		    notes = "Metodo para obtener una imagen",produces="image/jpeg")
 	@GetMapping(value="/{name}", produces= MediaType.IMAGE_JPEG_VALUE)
 	public @ResponseBody byte[] getImagen(@PathVariable @NotNull String name) throws JobGreenExeption{
 		try {

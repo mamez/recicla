@@ -11,7 +11,11 @@ import java.util.List;
  */
 @Entity
 public class Promocion implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -27,7 +31,7 @@ public class Promocion implements Serializable {
 	private String titulo;
 
 	//bi-directional many-to-one association to NewTable
-	@OneToMany(mappedBy="promocionBean")
+	@OneToMany(mappedBy="promocion")
 	private List<SolicitudCanje> solicitudCanje;
 
 	public Promocion() {
@@ -83,16 +87,24 @@ public class Promocion implements Serializable {
 
 	public SolicitudCanje addNewTable(SolicitudCanje newTable) {
 		getNewTables().add(newTable);
-		newTable.setPromocionBean(this);
+		newTable.setPromocion(this);
 
 		return newTable;
 	}
 
 	public SolicitudCanje removeNewTable(SolicitudCanje newTable) {
 		getNewTables().remove(newTable);
-		newTable.setPromocionBean(null);
+		newTable.setPromocion(null);
 
 		return newTable;
+	}
+
+	public List<SolicitudCanje> getSolicitudCanje() {
+		return solicitudCanje;
+	}
+
+	public void setSolicitudCanje(List<SolicitudCanje> solicitudCanje) {
+		this.solicitudCanje = solicitudCanje;
 	}
 
 }

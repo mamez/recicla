@@ -12,7 +12,11 @@ import java.util.List;
 @Entity
 @Table(name="pr_usuario")
 public class PrUsuario implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,11 +27,10 @@ public class PrUsuario implements Serializable {
 	private String lng;
 
 	private String nombre;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
+    
+	@ManyToOne()
 	@JoinColumn(name="usuario")
-	private Usuario usuarioBean;
+	private Usuario usuario;
 
 	//bi-directional many-to-one association to SolicitudRecoleccion
 	@OneToMany(mappedBy="prUsuario")
@@ -68,14 +71,6 @@ public class PrUsuario implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Usuario getUsuarioBean() {
-		return this.usuarioBean;
-	}
-
-	public void setUsuarioBean(Usuario usuarioBean) {
-		this.usuarioBean = usuarioBean;
-	}
-
 	public List<SolicitudRecoleccion> getSolicitudRecoleccions() {
 		return this.solicitudRecoleccions;
 	}
@@ -96,6 +91,14 @@ public class PrUsuario implements Serializable {
 		solicitudRecoleccion.setPrUsuario(null);
 
 		return solicitudRecoleccion;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

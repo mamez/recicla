@@ -1,11 +1,12 @@
 package edu.recicla.app.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import edu.recicla.app.entity.Tip;
 
-@Repository
-public interface TipRepository extends CrudRepository<Tip, Long>{
+
+@RepositoryRestResource(collectionResourceRel = "tips", path = "tips")
+public interface TipRepository extends PagingAndSortingRepository<Tip, Long>{
 
 }

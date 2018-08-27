@@ -13,7 +13,11 @@ import java.util.List;
 @Entity
 @Table(name="tipo_reciclaje")
 public class TipoReciclaje implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -30,8 +34,8 @@ public class TipoReciclaje implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to DetalleSolicitud
-	@OneToMany(mappedBy="tipoReciclajeBean")
-	private List<DetalleSolicitud> detalleSolicituds;
+	@OneToMany(mappedBy="tipoReciclaje")
+	private List<DetalleSolicitud> detalleSolicitud;
 
 	public TipoReciclaje() {
 	}
@@ -76,24 +80,24 @@ public class TipoReciclaje implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<DetalleSolicitud> getDetalleSolicituds() {
-		return this.detalleSolicituds;
+	public List<DetalleSolicitud> getDetalleSolicitud() {
+		return this.detalleSolicitud;
 	}
 
-	public void setDetalleSolicituds(List<DetalleSolicitud> detalleSolicituds) {
-		this.detalleSolicituds = detalleSolicituds;
+	public void setDetalleSolicitud(List<DetalleSolicitud> detalleSolicitud) {
+		this.detalleSolicitud = detalleSolicitud;
 	}
 
 	public DetalleSolicitud addDetalleSolicitud(DetalleSolicitud detalleSolicitud) {
-		getDetalleSolicituds().add(detalleSolicitud);
-		detalleSolicitud.setTipoReciclajeBean(this);
+		getDetalleSolicitud().add(detalleSolicitud);
+		detalleSolicitud.setTipoReciclaje(this);
 
 		return detalleSolicitud;
 	}
 
 	public DetalleSolicitud removeDetalleSolicitud(DetalleSolicitud detalleSolicitud) {
-		getDetalleSolicituds().remove(detalleSolicitud);
-		detalleSolicitud.setTipoReciclajeBean(null);
+		getDetalleSolicitud().remove(detalleSolicitud);
+		detalleSolicitud.setTipoReciclaje(null);
 
 		return detalleSolicitud;
 	}

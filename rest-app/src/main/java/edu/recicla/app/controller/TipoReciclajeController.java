@@ -20,20 +20,15 @@ import com.recicla.app.security.JobGreenExeption;
 
 import edu.recicla.app.model.TipoReciclajeModel;
 import edu.recicla.app.service.TipoReciclajeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/tipoReciclaje")
-@Api(description="Tipo Reciclaje")
 public class TipoReciclajeController {
 	
 	@Autowired
 	TipoReciclajeService tipoReciclajeService;
 	
 	@GetMapping /*Mapealo como servicio rest*/
-	@ApiOperation(value="Tipo reciclaje",notes="Método para obtener todos los tipos de reciclaje")
-	
 	public ResponseEntity<List<TipoReciclajeModel>> grtAll() throws JobGreenExeption{
 		try {
 			List<TipoReciclajeModel> resp= tipoReciclajeService.getAllTipoReciclaje();
@@ -48,8 +43,6 @@ public class TipoReciclajeController {
 	}
 	
 	@GetMapping("/{id}") /*Mapealo como servicio rest*/
-	@ApiOperation(value="Obtener tipo de reciclaje",
-	notes="Método para obtener un tipo de reciclaje")
 	
 	public ResponseEntity<TipoReciclajeModel> getSingle(@PathVariable(name="id", required=true) Long id) throws JobGreenExeption{
 		try {
@@ -65,8 +58,6 @@ public class TipoReciclajeController {
 	}
 	
 	@PostMapping 
-	@ApiOperation(value="Crear tipo de reciclaje",
-	notes="Método para crear un tipo de reciclaje")
 	public ResponseEntity<TipoReciclajeModel> save(@RequestBody @Valid TipoReciclajeModel model)
 			throws JobGreenExeption{
 		try {
@@ -82,8 +73,6 @@ public class TipoReciclajeController {
 	}
 	
 	@PutMapping("/{id}") 
-	@ApiOperation(value="Actualizar tipo de reciclaje",
-	notes="Método para actualizar de reciclaje")
 	public ResponseEntity<TipoReciclajeModel> update(@RequestBody @Valid TipoReciclajeModel model,
 			@PathVariable(name="id", required=true) Long id)
 			throws JobGreenExeption{
@@ -98,8 +87,6 @@ public class TipoReciclajeController {
 	}
 	
 	@DeleteMapping("/{id}") 
-	@ApiOperation(value="Eliminar tipo de reciclaje",
-	notes="Método Eliminar un tipo de reciclaje")
 	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) Long id)
 			throws JobGreenExeption{
 		try {

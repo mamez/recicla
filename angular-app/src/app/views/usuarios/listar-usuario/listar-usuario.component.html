@@ -1,0 +1,41 @@
+<app-contenido [titulo]="title">
+    <div *ngFor="let alert of alertas">
+        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+      </div>
+  <app-crear-usuario></app-crear-usuario>
+  <app-eliminar-usuario></app-eliminar-usuario>
+  <app-modificar-usuario></app-modificar-usuario>
+    <table datatable [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Puntos</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listData">
+            <td>{{data.id}}</td>
+            <td>{{data.nombre}}</td>
+            <td>{{data.apellidos}}</td>
+            <td>{{data.correo}}</td>
+            <td style="width: 90px;">{{data.puntos}}</td>
+            <td style="width: 100px;" >{{data.tipoUsuario | tipoUsuario}}</td>
+            <td>{{data.estadoUsuario | estoUsuario }}</td>
+            <td style="width: 100px;">
+              <button (click)="deleteElemt(data)" class="btn btn-primary float-left" >
+                <i class="icon-trash icons"></i>
+              </button>
+              <button  (click)="editElemt(data)"  class="btn btn-primary float-right">
+                <i class="icon-pencil icons"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</app-contenido>

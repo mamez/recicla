@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '../../../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TipoReciclajeModel } from '../../../../model/tipo-reciclaje-model';
 import { TipoReciclajeService } from '../../../../services/tipo-reciclaje.service';
 

@@ -13,7 +13,11 @@ import java.util.Date;
 @Entity
 @Table(name="detalle_solicitud")
 public class DetalleSolicitud implements Serializable {
-	private static final Long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -32,14 +36,14 @@ public class DetalleSolicitud implements Serializable {
 	private Long totalPuntos;
 
 	//bi-directional many-to-one association to SolicitudRecoleccion
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="solicitud")
 	private SolicitudRecoleccion solicitudRecoleccion;
 
 	//bi-directional many-to-one association to TipoReciclaje
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="tipo_reciclaje")
-	private TipoReciclaje tipoReciclajeBean;
+	private TipoReciclaje tipoReciclaje;
 
 	public DetalleSolicitud() {
 	}
@@ -92,12 +96,13 @@ public class DetalleSolicitud implements Serializable {
 		this.solicitudRecoleccion = solicitudRecoleccion;
 	}
 
-	public TipoReciclaje getTipoReciclajeBean() {
-		return this.tipoReciclajeBean;
+	public TipoReciclaje getTipoReciclaje() {
+		return tipoReciclaje;
 	}
 
-	public void setTipoReciclajeBean(TipoReciclaje tipoReciclajeBean) {
-		this.tipoReciclajeBean = tipoReciclajeBean;
+	public void setTipoReciclaje(TipoReciclaje tipoReciclaje) {
+		this.tipoReciclaje = tipoReciclaje;
 	}
+
 
 }

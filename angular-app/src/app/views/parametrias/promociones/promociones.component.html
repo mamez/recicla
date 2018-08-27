@@ -1,3 +1,39 @@
-<p>
-  promociones works!
-</p>
+<app-contenido [titulo]="titulo">
+  <app-promocion-crear></app-promocion-crear>
+  <app-promocion-modificar></app-promocion-modificar>
+  <app-promocion-eliminar></app-promocion-eliminar>
+  <div *ngFor="let alert of alertas">
+      <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+    </div>
+<table datatable [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Titulo</th>
+      <th>Descripción</th>
+      <th>Imagen</th>
+      <th>Factor puntos</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of listData">
+      <td>{{data.id}}</td>
+      <td>{{data.titulo}}</td>
+      <td>{{data.descripcion}}</td>
+      <td>{{data.imagen}}</td>
+      <td>{{data.factorPuntos}}</td>
+      <td style="width: 100px;">
+        <button (click)="deleteElemt(data)" class="btn btn-primary float-left" type="button">
+          <i class="icon-trash icons"></i>
+        </button>
+        <button (click)="editElemt(data)" class="btn btn-primary float-right" type="button">
+          <i class="icon-pencil icons"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</app-contenido>
+
+

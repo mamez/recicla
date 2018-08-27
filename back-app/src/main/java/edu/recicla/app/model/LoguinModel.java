@@ -1,19 +1,14 @@
 package edu.recicla.app.model;
 
-import javax.validation.constraints.NotNull;
-
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 public class LoguinModel {
 	
-  @ApiModelProperty(notes="Correo de usuario para autenticar",required=true)	
   @NotNull(message="El campo usuario no puede ser nulo")
   @Email(message="Formato de correo invalido")
   private String user;
   
-  @ApiModelProperty(notes="Password de usuario",required=true)	
   @NotNull(message="El campo password no puede ser nulo")
   private String password;
 

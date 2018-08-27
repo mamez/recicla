@@ -2,13 +2,13 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { AlertModule } from "ngx-bootstrap/alert";
 import { ModalModule } from "ngx-bootstrap/modal";
-import { HttpClientModule } from "../../../../node_modules/@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import {
   FormBuilder,
   FormsModule,
   ReactiveFormsModule
-} from "../../../../node_modules/@angular/forms";
-import { DataTablesModule } from "../../../../node_modules/angular-datatables";
+} from "@angular/forms";
+import { DataTablesModule } from "angular-datatables";
 import { UtilsModule } from "../../utils/utils.module";
 import { ParametriasRoutingModule } from "./parametrias-routing.module";
 import { PromocionesComponent } from "./promociones/promociones.component";
@@ -20,6 +20,9 @@ import { TipsModificarComponent } from './tips/tips-modificar/tips-modificar.com
 import { TipoRecCrearComponent } from './tipo-revciclaje/tipo-rec-crear/tipo-rec-crear.component';
 import { TipoRecModificatComponent } from './tipo-revciclaje/tipo-rec-modificat/tipo-rec-modificat.component';
 import { TipoRecEliminarComponent } from './tipo-revciclaje/tipo-rec-eliminar/tipo-rec-eliminar.component';
+import { PromocionCrearComponent } from './promociones/promocion-crear/promocion-crear.component';
+import { PromocionModificarComponent } from './promociones/promocion-modificar/promocion-modificar.component';
+import { PromocionEliminarComponent } from './promociones/promocion-eliminar/promocion-eliminar.component';
 
 @NgModule({
   imports: [
@@ -42,7 +45,10 @@ import { TipoRecEliminarComponent } from './tipo-revciclaje/tipo-rec-eliminar/ti
     TipsModificarComponent,
     TipoRecCrearComponent,
     TipoRecModificatComponent,
-    TipoRecEliminarComponent
+    TipoRecEliminarComponent,
+    PromocionCrearComponent,
+    PromocionModificarComponent,
+    PromocionEliminarComponent
   ],
   providers: [FormBuilder]
 })

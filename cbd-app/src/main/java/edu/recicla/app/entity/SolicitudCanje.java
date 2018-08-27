@@ -12,7 +12,11 @@ import java.util.Date;
 @Entity
 @Table(name="solicitud_canje")
 public class SolicitudCanje implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,14 +37,14 @@ public class SolicitudCanje implements Serializable {
 	private Long puntoRecoleccion;
 
 	//bi-directional many-to-one association to Promocion
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="promocion")
-	private Promocion promocionBean;
+	private Promocion promocion;
 
 	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="usuario")
-	private Usuario usuarioBean;
+	private Usuario usuario;
 
 	public SolicitudCanje() {
 	}
@@ -93,20 +97,20 @@ public class SolicitudCanje implements Serializable {
 		this.puntoRecoleccion = puntoRecoleccion;
 	}
 
-	public Promocion getPromocionBean() {
-		return this.promocionBean;
+	public Promocion getPromocion() {
+		return promocion;
 	}
 
-	public void setPromocionBean(Promocion promocionBean) {
-		this.promocionBean = promocionBean;
+	public void setPromocion(Promocion promocion) {
+		this.promocion = promocion;
 	}
 
-	public Usuario getUsuarioBean() {
-		return this.usuarioBean;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuarioBean(Usuario usuarioBean) {
-		this.usuarioBean = usuarioBean;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

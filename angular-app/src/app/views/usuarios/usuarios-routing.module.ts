@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.component';
+import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
 
 const routes: Routes = [
 {
   path: '',
-  component: UsuariosListarComponent,
+  component: ListarUsuarioComponent,
   data: {
     title: 'Usuarios'
   },
   children: [
     {
       path: 'listar',
-      component: UsuariosListarComponent,
+      component: ListarUsuarioComponent,
       data: {
         title: 'Listar'
       }

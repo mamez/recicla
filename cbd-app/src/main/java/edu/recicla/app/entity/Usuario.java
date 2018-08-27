@@ -1,13 +1,28 @@
 package edu.recicla.app.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.recicla.app.enums.EstadoUsuario;
 import com.recicla.app.enums.TipoUsuario;
 
-import java.util.Date;
-import java.util.List;
+import edu.recicla.app.repository.JsonDateSerializer;
 
 
 /**
@@ -16,7 +31,11 @@ import java.util.List;
  */
 @Entity
 public class Usuario implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,24 +43,26 @@ public class Usuario implements Serializable {
 
 	private String apellidos;
 
+    @Column(unique=true, nullable=false)
 	private String correo;
 
 	private String nombre;
 
+	//@JsonIgnore
 	private String password;
 
 	private Long puntos;
 
 	//bi-directional many-to-one association to NewTable
-	@OneToMany(mappedBy="usuarioBean")
+	@OneToMany(mappedBy="usuario")
 	private List<SolicitudCanje> solicitudCanje;
 
 	//bi-directional many-to-one association to PrUsuario
-	@OneToMany(mappedBy="usuarioBean")
+	@OneToMany(mappedBy="usuario")
 	private List<PrUsuario> prUsuarios;
 
 	//bi-directional many-to-one association to PuntosCritico
-	@OneToMany(mappedBy="usuarioBean")
+	@OneToMany(mappedBy="usuario")
 	private List<PuntosCritico> puntosCriticos;
 
 	@Enumerated(EnumType.STRING)
@@ -53,10 +74,21 @@ public class Usuario implements Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_modificacion")
+	@JsonSerialize(using=JsonDateSerializer.class) 
 	private Date fechaModificacion;
 
 	public Usuario() {
 	}
+	
+	    @PrePersist
+	    public void prePersist() {
+	        this.fechaModificacion= new Date();
+	    }
+	 
+	    @PreUpdate
+	    public void preUpdate() {
+	    	 this.fechaModificacion= new Date();
+	    }
 
 	public Long getId() {
 		return this.id;
@@ -108,19 +140,7 @@ public class Usuario implements Serializable {
 		this.solicitudCanje = newTables;
 	}
 
-	public SolicitudCanje addNewTable(SolicitudCanje newTable) {
-		getNewTables().add(newTable);
-		newTable.setUsuarioBean(this);
-
-		return newTable;
-	}
-
-	public SolicitudCanje removeNewTable(SolicitudCanje newTable) {
-		getNewTables().remove(newTable);
-		newTable.setUsuarioBean(null);
-
-		return newTable;
-	}
+	
 
 	public List<PrUsuario> getPrUsuarios() {
 		return this.prUsuarios;
@@ -132,14 +152,14 @@ public class Usuario implements Serializable {
 
 	public PrUsuario addPrUsuario(PrUsuario prUsuario) {
 		getPrUsuarios().add(prUsuario);
-		prUsuario.setUsuarioBean(this);
+		prUsuario.setUsuario(this);
 
 		return prUsuario;
 	}
 
 	public PrUsuario removePrUsuario(PrUsuario prUsuario) {
 		getPrUsuarios().remove(prUsuario);
-		prUsuario.setUsuarioBean(null);
+		prUsuario.setUsuario(null);
 
 		return prUsuario;
 	}
@@ -196,6 +216,14 @@ public class Usuario implements Serializable {
 
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+
+	public List<SolicitudCanje> getSolicitudCanje() {
+		return solicitudCanje;
+	}
+
+	public void setSolicitudCanje(List<SolicitudCanje> solicitudCanje) {
+		this.solicitudCanje = solicitudCanje;
 	}
 
 

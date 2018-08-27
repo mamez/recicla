@@ -35,14 +35,14 @@ public interface PuntoCriticoServices {
 	 * @param model
 	 * @return
 	 */
-	public PuntoCriticoModel updateEstatePuntoCritico(PuntoCriticoModel model);
+	public void updateEstatePuntoCritico(PuntoCriticoModel model);
 	
 	/**
 	 * Metodo para eliminar punto critico
 	 * @param id
 	 * @return
 	 */
-	public boolean updateEstatePuntoCritico(Long id);
+	public void delatePuntoCritico(Long id);
 	
 	
 }

@@ -3,7 +3,7 @@ import {
   FormBuilder,
   FormGroup,
   Validators
-} from "../../../../../../node_modules/@angular/forms";
+} from "@angular/forms";
 import { TipsModel } from "../../../../model/tips-model";
 import { TipsService } from "../../../../services/tips.service";
 

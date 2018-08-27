@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { DataTableDirective } from "../../../../../node_modules/angular-datatables";
-import { Subject } from "../../../../../node_modules/rxjs";
+import { DataTableDirective } from "angular-datatables";
+import { Subject } from "rxjs";
 import { TipsModel } from "../../../model/tips-model";
 import { TipsService } from "../../../services/tips.service";
 import { AlertModel, alertType } from "../../../model/alert-model";
@@ -24,7 +24,6 @@ export class TipsComponent implements OnInit, OnDestroy {
 
   constructor(private tipsServices: TipsService) {
     this.tipsServices.contextoService.subscribe(val => {
-      console.log(val);
       this.initContext(val);
     });
   }
@@ -58,7 +57,7 @@ export class TipsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tipsServices.getListTips().subscribe(data => {
-      this.listData = data;
+      this.listData = data._embedded.tips;
       this.dtTrigger.next();
     });
   }
@@ -71,7 +70,7 @@ export class TipsComponent implements OnInit, OnDestroy {
   resetdata() {
     const mapdata = new Map<string, any>();
     this.tipsServices.getListTips().subscribe(data => {
-      this.listData = data;
+      this.listData = data._embedded.tips;
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
         this.dtTrigger.next();

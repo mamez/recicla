@@ -1,11 +1,11 @@
 package edu.recicla.app.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import edu.recicla.app.entity.TipoReciclaje;
 
-@Repository
-public interface TipoReciclajeRepository extends CrudRepository<TipoReciclaje, Long>{
+@RepositoryRestResource(collectionResourceRel = "tipoReciclaje", path = "tipoReciclaje")
+public interface TipoReciclajeRepository extends PagingAndSortingRepository<TipoReciclaje, Long>{
 
 }

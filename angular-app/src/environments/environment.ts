@@ -5,5 +5,10 @@
 
 export const environment = {
   production: false,
-  api: "http://localhost:8080"
+  api: "http://localhost:8080",
+  lat: 4.6567173,
+  long: -74.0572354,
+  zoom: 14,
+  apiGoolge: "https://maps.googleapis.com/maps/api/geocode/json",
+  googleKey: "AIzaSyDJ_l02eBc3mby0IwBry9r0CU5nPuonSow"
 };

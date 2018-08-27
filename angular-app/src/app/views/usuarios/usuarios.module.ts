@@ -2,17 +2,22 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
-import { ErrorInterceptorService } from '../../config/error-interceptor.service';
-import { RequestInterceptorService } from '../../config/request-interceptor.service';
-import { ResponceInterceptorService } from '../../config/responce-interceptor.service';
-import { PruebaService } from '../../services/prueba.service';
 import { ContenidoComponent } from '../../utils/contenido/contenido.component';
 import { DataTableComponent } from '../../utils/data-table/data-table.component';
 import { FileUploadComponent } from '../../utils/file-upload/file-upload.component';
 import { GmapsComponent } from '../../utils/gmaps/gmaps.component';
-import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.component';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { UtilsModule } from '../../utils/utils.module';
+import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
+import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.component';
+import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
+import { EliminarUsuarioComponent } from './eliminar-usuario/eliminar-usuario.component';
+import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
+import { ReactiveFormsModule } from '../../../../node_modules/@angular/forms';
+import { ModalModule } from '../../../../node_modules/ngx-bootstrap/modal';
+import { AlertModule } from '../../../../node_modules/ngx-bootstrap/alert';
+import { EstoUsuarioPipe } from '../../pipe/esto-usuario.pipe';
+import { TipoUsuarioPipe } from '../../pipe/tipo-usuario.pipe';
 
 
 
@@ -22,11 +27,15 @@ import { UtilsModule } from '../../utils/utils.module';
     UsuariosRoutingModule,
     HttpClientModule,
     DataTablesModule,
-    UtilsModule
+    UtilsModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
   ],
-    declarations: [UsuariosListarComponent],
+    declarations: [ CrearUsuarioComponent, ListarUsuarioComponent,
+      ModificarUsuarioComponent, EliminarUsuarioComponent, DetalleUsuarioComponent, EstoUsuarioPipe, TipoUsuarioPipe],
   providers: [
-  PruebaService
+
   ]
 })
 export class UsuariosModule { }

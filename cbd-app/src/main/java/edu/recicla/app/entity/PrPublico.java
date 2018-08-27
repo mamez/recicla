@@ -11,7 +11,11 @@ import javax.persistence.*;
 @Entity
 @Table(name="pr_publico")
 public class PrPublico implements Serializable {
-	private static final Long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,6 +28,8 @@ public class PrPublico implements Serializable {
 	private String lng;
 
 	private String nombre;
+	
+	private String direccion;
 
 	public PrPublico() {
 	}
@@ -44,8 +50,24 @@ public class PrPublico implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 	public String getLat() {
-		return this.lat;
+		return lat;
 	}
 
 	public void setLat(String lat) {
@@ -53,19 +75,11 @@ public class PrPublico implements Serializable {
 	}
 
 	public String getLng() {
-		return this.lng;
+		return lng;
 	}
 
 	public void setLng(String lng) {
 		this.lng = lng;
-	}
-
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 }

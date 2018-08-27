@@ -11,8 +11,8 @@ import {
   ViewChild
 } from "@angular/core";
 import { Subject } from "rxjs";
-import { HttpClient } from "../../../../node_modules/@angular/common/http";
-import { DataTableDirective } from "../../../../node_modules/angular-datatables";
+import { HttpClient } from "@angular/common/http";
+import { DataTableDirective } from "angular-datatables";
 
 @Component({
   selector: "app-data-table",

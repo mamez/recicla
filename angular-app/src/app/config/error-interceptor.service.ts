@@ -11,7 +11,9 @@ export class ErrorInterceptorService implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
-        if (err.status === 401) {
+      if (err.status === 404) {
+        this.notificationsService.addError('Error servicio no encontrado');
+        } else if (err.status === 401) {
             // Aqui mandamos el servicio para logout
             location.reload(true);
         } else if ( err.status >= 500) {

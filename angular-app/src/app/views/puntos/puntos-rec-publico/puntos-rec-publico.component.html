@@ -1,3 +1,46 @@
-<p>
-  puntos-rec-publico works!
-</p>
+<app-contenido [titulo]="title">
+<app-pr-eliminar></app-pr-eliminar>
+<div *ngFor="let alert of alertas">
+    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+  </div>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <agm-marker *ngFor="let data of listData" [latitude]="+data.lat" [longitude]="+data.lng">
+        <agm-snazzy-info-window    [maxWidth]="400" [closeWhenOthersOpen]="true">
+            <ng-template>
+               <h4>{{data.nombre}}</h4>
+               <p>{{data.descripcion}}</p>
+            </ng-template>
+          </agm-snazzy-info-window>
+    </agm-marker>
+</agm-map>
+<br />
+<a class="btn btn-block btn-primary"  routerLink="crear" style="color: #ffffff; max-width: 179px;" >Crear punto recoleccion</a>
+<table datatable [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-sm">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Titulo</th>
+        <th>Descripcion</th>
+        <th>Imagen</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of listData">
+        <td>{{data.id}}</td>
+        <td>{{data.nombre}}</td>
+        <td>{{data.descripcion}}</td>
+        <td>{{data.direccion}}</td>
+        <td style="width: 100px;">
+          <button (click)="deleteElemt(data)" class="btn btn-primary float-left" >
+            <i class="icon-trash icons"></i>
+          </button>
+          <a [routerLink]="[ data.id,'modificar' ]" class="btn btn-primary float-right">
+            <i class="icon-pencil icons"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</app-contenido>
+

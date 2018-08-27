@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TipoReciclajeModel } from '../../../model/tipo-reciclaje-model';
 import { AlertModel, alertType } from '../../../model/alert-model';
-import { DataTableDirective } from '../../../../../node_modules/angular-datatables';
-import { Subject } from '../../../../../node_modules/rxjs';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 import { TipoReciclajeService } from '../../../services/tipo-reciclaje.service';
 
 @Component({
@@ -23,7 +23,6 @@ export class TipoRevciclajeComponent implements OnInit, OnDestroy {
 
   constructor(private tipoReciclajeService: TipoReciclajeService) {
     this.tipoReciclajeService.contextoService.subscribe(val => {
-      console.log(val);
       this.initContext(val);
     });
   }
@@ -59,7 +58,7 @@ export class TipoRevciclajeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tipoReciclajeService.getList().subscribe(data => {
-      this.listData = data;
+      this.listData = data._embedded.tipoReciclaje;
       this.dtTrigger.next();
     });
   }
@@ -72,7 +71,7 @@ export class TipoRevciclajeComponent implements OnInit, OnDestroy {
   resetdata() {
     const mapdata = new Map<string, any>();
     this.tipoReciclajeService.getList().subscribe(data => {
-      this.listData = data;
+      this.listData = data._embedded.tipoReciclaje;
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
         this.dtTrigger.next();

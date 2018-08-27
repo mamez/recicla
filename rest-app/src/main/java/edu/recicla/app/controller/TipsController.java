@@ -20,10 +20,7 @@ import com.recicla.app.security.JobGreenExeption;
 
 import edu.recicla.app.model.TipsModel;
 import edu.recicla.app.service.TipsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
-@Api(description="Tips")
 @RestController
 @RequestMapping("/tips")
 public class TipsController {
@@ -32,8 +29,6 @@ public class TipsController {
 	TipsService tipsService;
 	
 	@GetMapping
-	@ApiOperation(value = "Tips",
-		    notes = "Metodo para obtener todos los tips")
 	public ResponseEntity<List<TipsModel>> grtAll() throws JobGreenExeption{
 		try {
 			List<TipsModel> resp=tipsService.getAllTips();
@@ -48,8 +43,6 @@ public class TipsController {
 	}
 	
 	@GetMapping("/{id}")
-	@ApiOperation(value = "Obtener Tips",
-		    notes = "Metodo para obtener un tips")
 	public ResponseEntity<TipsModel> getSingle(@PathVariable(name="id", required=true) Long id)
 			throws JobGreenExeption{
 		try {
@@ -65,8 +58,6 @@ public class TipsController {
 	}
 	
 	@PostMapping
-	@ApiOperation(value = "Crear un tips",
-    notes = "Metodo para Crear un tips")
 	public ResponseEntity<TipsModel> save(@RequestBody @Valid TipsModel model)
 			throws JobGreenExeption{
 		try {
@@ -82,8 +73,6 @@ public class TipsController {
 	}
 	
 	@PutMapping("/{id}")
-	@ApiOperation(value = "Actualizar tips",
-    notes = "Metodo para Crear un tips")
 	public ResponseEntity<TipsModel> update(@RequestBody @Valid TipsModel model,
 			@PathVariable(name="id", required=true) Long id) throws JobGreenExeption{
 		try {
@@ -97,8 +86,6 @@ public class TipsController {
 
 	
 	@DeleteMapping("/{id}")
-	@ApiOperation(value = "Eliminar tips",
-    notes = "Metodo para eliminar un tips")
 	public ResponseEntity<?> delete(@PathVariable(name="id", required=true) Long id) 
 			throws JobGreenExeption{
 		try {

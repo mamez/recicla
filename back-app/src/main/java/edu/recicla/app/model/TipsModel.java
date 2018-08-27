@@ -2,25 +2,18 @@ package edu.recicla.app.model;
 
 import javax.validation.constraints.NotNull;
 
-import io.swagger.annotations.ApiModelProperty;
-
 public class TipsModel {
 	
-	@ApiModelProperty(notes="Codigo del tips",required=false)
 	private Long id;
 	
 	@NotNull(message="El campo descripcion no puede ser nulo")
-	@ApiModelProperty(notes="Descripcion del tips",required=true)
 	private String descripcion;
 	
-	@ApiModelProperty(notes="Nombre de la imagen guardada",required=true)
 	private String imagen;
 	
 	@NotNull(message="El campo titulo no puede ser nulo")
-	@ApiModelProperty(notes="Titulo del tips",required=true)
 	private String titulo;
 	
-	@ApiModelProperty(notes="Url de la imagen para consultar desde navegador",required=false)
 	private String imagenUrl;
 	
 	public Long getId() {

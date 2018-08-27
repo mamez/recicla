@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "../../../node_modules/@angular/common/http";
-import { DataTablesModule } from "../../../node_modules/angular-datatables";
+import { HttpClientModule } from "@angular/common/http";
+import { DataTablesModule } from "angular-datatables";
 import { ContenidoComponent } from "./contenido/contenido.component";
 import { DataTableComponent } from "./data-table/data-table.component";
 import { FileUploadComponent } from "./file-upload/file-upload.component";

@@ -1,11 +1,11 @@
 package edu.recicla.app.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import edu.recicla.app.entity.SolicitudCanje;
 
-@Repository
-public interface SolicitudCanjeRepository extends CrudRepository<SolicitudCanje, Long> {
+@RepositoryRestResource(collectionResourceRel = "solicitudCanje", path = "solicitudCanje")
+public interface SolicitudCanjeRepository extends PagingAndSortingRepository<SolicitudCanje, Long> {
 
 }

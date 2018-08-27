@@ -40,12 +40,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { LoguinComponent } from './loguin/loguin.component';
-import { DataTablesModule } from '../../node_modules/angular-datatables';
+import { DataTablesModule } from 'angular-datatables';
 import { UtilsModule } from './utils/utils.module';
-import { HTTP_INTERCEPTORS } from '../../node_modules/@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptorService } from './config/error-interceptor.service';
 import { ResponceInterceptorService } from './config/responce-interceptor.service';
 import { RequestInterceptorService } from './config/request-interceptor.service';
+import { EstoUsuarioPipe } from './pipe/esto-usuario.pipe';
+import { TipoUsuarioPipe } from './pipe/tipo-usuario.pipe';
 
 @NgModule({
   imports: [
